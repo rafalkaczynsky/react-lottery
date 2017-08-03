@@ -4,7 +4,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var Comment = require('./model/comments');
+var dataBase = require('./model/database');
 //and create our instances
 var app = express();
 var router = express.Router();
@@ -12,7 +12,8 @@ var router = express.Router();
 //it up, or 3001
 var port = process.env.API_PORT || 3001;
 //db config
-mongoose.connect('mongodb://rafalkaczynsky1985:paulinka97@ds021046.mlab.com:21046/comments');
+mongoose.connect('mongodb://rafalkaczynsky1985:paulinka97@ds129723.mlab.com:29723/kaplan-lottery');
+
 //now we should configure the API to use bodyParser and look for 
 //JSON data in the request body
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,27 +35,30 @@ router.get('/', function(req, res) {
 });
 
 //==============================================
-//adding the /comments route to our /api router
-router.route('/comments')
+//adding the /users route to our /api router
+router.route('/users')
 
- //retrieve all comments from the database
+ //retrieve all records from the database
  .get(function(req, res) {
     //looks at our Comment Schema
-    Comment.find(function(err, comments) {
+    dataBase.find(function(err, record) {
         if (err)
         res.send(err);
-        //responds with a json object of our database comments.
-        res.json(comments)
+        //responds with a json object of our database record.
+        res.json(record)
     });
  })
 
- //post new comment to the database
+ //post new user to the database
  .post(function(req, res) {
-    var comment = new Comment();
+    var database = new dataBase();
     //body parser lets us use the req.body
-    comment.author = req.body.author;
-    comment.text = req.body.text;
-    comment.save(function(err) {
+    database.users.firstName = req.body.firstName;
+    database.users.surname = req.body.surname;
+    database.users.email = req.body.email;
+    database.users.age = req.body.age;
+
+    database.save(function(err) {
     if (err)
     res.send(err);
     res.json({ message: 'Comment successfully added!' });
