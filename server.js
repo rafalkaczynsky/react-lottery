@@ -1,24 +1,28 @@
 //server.js
 'use strict'
 //first we import our dependencies…
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var dataBase = require('./model/database');
+var express = require('express'),
+ mongoose = require('mongoose'),
+ bodyParser = require('body-parser'),
+ User = require('./model/user'),
+ Code = require('./model/code'),
+ WinningCode = require('./model/winningCode'),
+ sg = require('sendgrid')("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");
+
 //and create our instances
 var app = express();
 var router = express.Router();
-//set our port to either a predetermined port number if you have set 
+//set our port to either a predetermined port number if you have set
 //it up, or 3001
 var port = process.env.API_PORT || 3001;
 //db config
 mongoose.connect('mongodb://rafalkaczynsky1985:paulinka97@ds129723.mlab.com:29723/kaplan-lottery');
 
-//now we should configure the API to use bodyParser and look for 
+//now we should configure the API to use bodyParser and look for
 //JSON data in the request body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//To prevent errors from Cross Origin Resource Sharing, we will set 
+//To prevent errors from Cross Origin Resource Sharing, we will set
 //our headers to allow CORS with middleware like so:
 app.use(function(req, res, next) {
  res.setHeader('Access-Control-Allow-Origin', '*');
@@ -33,6 +37,48 @@ app.use(function(req, res, next) {
 router.get('/', function(req, res) {
  res.json({ message: 'API Initialized!'});
 });
+//==============================================
+//adding the /users route to our /api router
+router.route('/codes')
+
+ //retrieve all records from the database
+ .get(function(req, res) {
+    //looks at our Comment Schema
+    Code.find(function(err, record) {
+        if (err)
+        res.send(err);
+        //responds with a json object of our database record.
+        res.json(record)
+    });
+
+ })
+
+ // //post new user to the database
+ // .post(function(req, res) {
+ //    var code = new Code();
+ //    //body parser lets us use the req.body
+ //    code.code = Math.floor(Math.random() * 1000);
+ //    code.winning = false;
+ //
+ //    code.save(function(err) {
+ //    if (err)
+ //    res.send(err);
+ //    res.json({ message: 'Code successfully created!' });
+ // });
+ // });
+
+ router.route('/winning-codes')
+ //retrieve all records from the database
+ .get(function(req, res) {
+    //looks at our Comment Schemavar doc = parent.children.id(_id);
+
+    WinningCode.find({}).exec(function(err, record) {
+        if (err)
+        res.send(err);
+        //responds with a json object of our database record.
+        res.json(record)
+    });
+ })
 
 //==============================================
 //adding the /users route to our /api router
@@ -41,7 +87,7 @@ router.route('/users')
  //retrieve all records from the database
  .get(function(req, res) {
     //looks at our Comment Schema
-    dataBase.find(function(err, record) {
+    User.find(function(err, record) {
         if (err)
         res.send(err);
         //responds with a json object of our database record.
@@ -49,24 +95,68 @@ router.route('/users')
     });
  })
 
+
  //post new user to the database
  .post(function(req, res) {
-    var database = new dataBase();
+    var user = new User();
     //body parser lets us use the req.body
-    database.users.firstName = req.body.firstName;
-    database.users.surname = req.body.surname;
-    database.users.email = req.body.email;
-    database.users.age = req.body.age;
+    user.firstName = req.body.firstName;
+    user.surname = req.body.surname;
+    user.email = req.body.email;
+    user.age = req.body.age;
 
-    database.save(function(err) {
+    user.save(function(err) {
     if (err)
-    res.send(err);
-    res.json({ message: 'Comment successfully added!' });
+      res.send(err);
+
+    res.json({ message: 'User successfully created!' });
+
+    sendUserEmail(req);
  });
  });
 
 //===================================
+function sendUserEmail(req) {
+  var request = sg.emptyRequest({
+    method: 'POST',
+    path: '/v3/mail/send',
+    body: {
+      personalizations: [
+        {
+          to: [
+            {
+              email: req.body.email
+            }
+          ],
+          bcc: [
+            {
+              email: 'admin@mediacabin.co.uk'
+            }
+          ],
+          subject: 'New Kaplan User',
+          "substitutions": {
+            ":name":  req.body.firstName,
+            ":code":  "CDIGH-3DS2F"
+          },
+        }
+      ],
+      from: {
+        email: 'kaplan@mediacabin.co.uk'
+      },
+      template_id: "4b5c53fa-fe82-474c-8f33-86172545163d",
 
+    }
+  });
+
+  sg.API(request, function (error, response) {
+    if (error) {
+      console.log('Error response received');
+    }
+    console.log(response.statusCode);
+    console.log(response.body);
+    console.log(response.headers);
+  });
+}
 
 //Use our router configuration when we call /api
 app.use('/api', router);

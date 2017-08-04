@@ -9,12 +9,12 @@ const validate = values => {
   const errors = {}
   if (!values.firstName) {
     errors.firstName = 'Required'
-  } else if (values.FirstName.length > 15) {
+  } else if (values.firstName.length > 15) {
     errors.FirstName = 'Must be 15 characters or less'
   }
   if (!values.surname) {
     errors.surname = 'Required'
-  } else if (values.Surname.length > 15) {
+  } else if (values.surname.length > 15) {
     errors.Surname = 'Must be 15 characters or less'
   }
   if (!values.email) {
@@ -91,7 +91,7 @@ class SyncValidationForm extends React.Component {
         <Field name="email" type="email" component={renderField} label="Email"/>
         <Field name="age" type="number" component={renderField} label="Age"/>
         <Panel>
-          Some text , and more Lorem ipsum .Some text , and more Lorem ipsum Some text , and more Lorem ipsum  Some text , and more Lorem ipsum  Some text , and more Lorem ipsum  Some text , and more Lorem ipsum 
+          Some text , and more Lorem ipsum .Some text , and more Lorem ipsum Some text , and more Lorem ipsum  Some text , and more Lorem ipsum  Some text , and more Lorem ipsum  Some text , and more Lorem ipsum
           <Checkbox>I Agree</Checkbox>
         </Panel>
         <div>

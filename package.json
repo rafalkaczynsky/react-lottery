@@ -15,7 +15,8 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
-    "redux-form": "^7.0.3"
+    "redux-form": "^7.0.3",
+    "sendgrid": "^5.2.0",
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
