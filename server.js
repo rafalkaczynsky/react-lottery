@@ -104,6 +104,7 @@ router.route('/users')
     user.surname = req.body.surname;
     user.email = req.body.email;
     user.age = req.body.age;
+    user.userCode = req.body.userCode
 
     user.save(function(err) {
     if (err)
@@ -136,7 +137,7 @@ function sendUserEmail(req) {
           subject: 'New Kaplan User',
           "substitutions": {
             ":name":  req.body.firstName,
-            ":code":  "CDIGH-3DS2F"
+            ":code":  req.body.userCode,
           },
         }
       ],

@@ -8,6 +8,7 @@ html, body {
 .App {
   text-align: left;
   width: 80%;
+  height: 80%;
   margin: 40px auto;
   border-radius: 5px;
   border: 1px solid lightgrey;
@@ -40,4 +41,10 @@ html, body {
 
 .submitButton {
   
+}
+
+.FeedbackContainer{
+  padding: 20px;
+  text-align: center;
+  background-color: lightblue;
 }

@@ -4,6 +4,27 @@ import { Field, reduxForm } from 'redux-form'
 
 import {Button, Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Panel, HelpBlock} from 'react-bootstrap'
 
+function readJSON(file) {
+    var request = new XMLHttpRequest();
+    request.open('GET', file, false);
+    request.send(null);
+    if (request.status == 200)
+        return request.responseText;
+};
+
+
+
+// var query = { name: 'blablabla' }
+// Model.update( query, { name: ' fewfewfew'}, option, callback)
+
+// Model.findOne({ name: ' borne'}, function(err, doc){
+//   doc.name = 'bkdsjkdasd'
+//   doc.save()
+//})
+
+var vaucherJSON = JSON.parse(readJSON('http://localhost:3001/api/codes'));
+var usersJSON = JSON.parse(readJSON('http://localhost:3001/api/users'));
+
 // --------------------------- validation --------------------------
 const validate = values => {
   const errors = {}
@@ -70,18 +91,33 @@ class SyncValidationForm extends React.Component {
 
   render(){
 
-    const { handleSubmit, pristine, reset, submitting } = this.props
-
+    const { handleSubmit, pristine, reset, submitting, onSubmitForm } = this.props
     const submit = (values) =>{
-      console.log(values.firstName, values.email)
-      let comment = values
-      axios.post(this.props.url, comment)
-        .then(res => {
-        this.setState({ data: res });
-      })
-      .catch(err => {
-      console.error(err);
-    });
+ 
+      usersJSON.map((item ,indx)=> {
+        if (item.email === values.email) {
+
+          let header = 'This Email already exist'
+          let paragraph = 'We are very sorry but you can play with us just one time'
+           onSubmitForm(true, header, paragraph)
+        } else if ((indx === (usersJSON.length-1)) && (item.email !== values.email)) {
+            let user = values
+            let randumNumber = Math.floor((Math.random() * 1000))
+            let randomCode = vaucherJSON[randumNumber].code 
+            user.userCode = randomCode 
+              // user.userCode = "P47E-Xknk"
+            axios.post(this.props.url, user)
+            .then(res => {
+   
+                let header = 'Form submitted successfully!'
+                let paragraph = "Email with Voucher Code has been sent to " + values.email + ". Check your email and good luck!!!"
+                 onSubmitForm(true, header, paragraph)
+            })
+            .catch(err => {
+              console.error(err);
+            });
+            }
+        })
 }
 
     return (
