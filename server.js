@@ -12,6 +12,7 @@ var express = require('express'),
 //and create our instances
 var app = express();
 var router = express.Router();
+
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
 var port = process.env.API_PORT || 3001;
@@ -95,7 +96,6 @@ router.route('/users')
     });
  })
 
-
  //post new user to the database
  .post(function(req, res) {
     var user = new User();
@@ -158,6 +158,8 @@ function sendUserEmail(req) {
     console.log(response.headers);
   });
 }
+
+
 
 //Use our router configuration when we call /api
 app.use('/api', router);

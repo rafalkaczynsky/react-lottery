@@ -17,7 +17,7 @@ class RenderFeedback extends React.Component {
   }
 }
 
-class App extends Component {
+class KaplanLotteryMain extends Component {
   constructor(props){
     super(props)
 
@@ -56,4 +56,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default KaplanLotteryMain;
