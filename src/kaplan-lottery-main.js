@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {PageHeader} from 'react-bootstrap'
 
-import {SyncValidationForm} from './components'
+import {SyncValidationForm, Header} from './components'
 import './App.css';
 
 class RenderFeedback extends React.Component {
@@ -39,11 +39,11 @@ class KaplanLotteryMain extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div className="app">
+        <Header />
         {this.state.isFormSubmitted && <RenderFeedback header={this.state.header} paragraph= {this.state.paragraph}/>}
         {!this.state.isFormSubmitted && (
           <div>
-            <PageHeader>Example page header <small>Subtext for header</small></PageHeader>
             <SyncValidationForm 
               url={this.props.url}
               pollInterval={this.props.poll}       

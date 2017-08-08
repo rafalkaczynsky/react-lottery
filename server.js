@@ -7,6 +7,7 @@ var express = require('express'),
  User = require('./model/user'),
  Code = require('./model/code'),
  WinningCode = require('./model/winningCode'),
+ Winner = require('./model/winner'),
  sg = require('sendgrid')("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")
 
 //and create our instances
@@ -55,19 +56,6 @@ router.route('/codes')
 
  })
 
- // //post new user to the database
- // .post(function(req, res) {
- //    var code = new Code();
- //    //body parser lets us use the req.body
- //    code.code = Math.floor(Math.random() * 1000);
- //    code.winning = false;
- //
- //    code.save(function(err) {
- //    if (err)
- //    res.send(err);
- //    res.json({ message: 'Code successfully created!' });
- // });
- // });
 
  router.route('/winning-codes')
  //retrieve all records from the database
@@ -80,6 +68,17 @@ router.route('/codes')
         //responds with a json object of our database record.
         res.json(record)
     });
+ })
+
+  .post(function(req, res) {
+
+    WinningCode.findOne({ _id: req.body._id}, function(err, doc){
+        doc.claimed = true
+        doc.save(function(err) {
+        if (err)
+            res.send(err);
+        });
+    }); 
  })
 
 //==============================================
@@ -115,6 +114,35 @@ router.route('/users')
     res.json({ message: 'User successfully created!' });
 
     sendUserEmail(req);
+ });
+ });
+
+ // ===== Winners======
+router.route('/winners')
+//  //retrieve all records from the database
+ .get(function(req, res) {
+
+    Winner.find(function(err, record) {
+        if (err)
+        res.send(err);
+        //responds with a json object of our database record.
+        res.json(record)
+    })
+ })
+
+.post(function(req, res) {
+
+    var winner = new Winner();
+
+    winner.user = req.body.user
+    winner.winnerCode = req.body.winnerCode
+
+    //body parser lets us use the req.body
+    winner.save(function(err) {
+    if (err)
+    res.send(err);
+    res.json({ message: 'Winner successfully created!' });
+
  });
  });
 

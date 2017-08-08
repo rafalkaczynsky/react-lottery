@@ -11,13 +11,6 @@ var codeSchema = new Schema({
     winning: Boolean
 });
 
-var winningCodeSchema = new Schema({
-    code: codeSchema,
-    title: String,
-    description: String,
-    videoUrl: String,
-    claimed: Boolean
-});
 
 //export our module to use in server.js
 module.exports = mongoose.model('code', codeSchema);

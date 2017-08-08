@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { Router, Route, BrowserRouter} from 'react-router-dom'
 import KaplanLotteryMain from './kaplan-lottery-main'
-
+import CodeCheckerMain from './code-checker-main'
 
 class KaplanLottery extends React.Component{
 
@@ -17,12 +17,13 @@ class KaplanLottery extends React.Component{
     }
 }
 
-class xxx extends React.Component {
+class CodeChecker extends React.Component {
     render(){
         return(
-            <div>
-                dsdsadsdsadadd
-            </div>
+            <CodeCheckerMain 
+                url='http://localhost:3001/api/users'
+                pollInterval={2000}
+            />
         )
     }
 }
@@ -31,8 +32,8 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <BrowserRouter>
         <div>
-            <Route path='/' component={KaplanLottery} />
-            <Route path='/checker' component={xxx} />
+            <Route exact path='/' component={KaplanLottery} />
+            <Route path='/code-checker' component={CodeChecker} />
         </div>
     </BrowserRouter>
   </Provider>

@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { Field, reduxForm } from 'redux-form'
 
-import {Button, Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Panel, HelpBlock} from 'react-bootstrap'
+import {Button, Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Panel, HelpBlock, PageHeader} from 'react-bootstrap'
 
 function readJSON(file) {
     var request = new XMLHttpRequest();
@@ -98,60 +98,6 @@ function handleCommentSubmit(comment) {
  }
 */
 
-class SyncValidationForm extends React.Component {
-
-  render(){
-
-    const { handleSubmit, pristine, reset, submitting, onSubmitForm } = this.props
-
-
-    const submit = (values) =>  {
- 
-      usersJSON.map((item ,indx)=> {
-        if (item.email === values.email) {
-
-          let header = 'This Email already exist'
-          let paragraph = 'We are very sorry but you can play with us just one time'
-           onSubmitForm(true, header, paragraph)
-        } else if ((indx === (usersJSON.length-1)) && (item.email !== values.email)) {
-            let user = values
-            let randumNumber = Math.floor((Math.random() * 1000))
-            let randomCode = vaucherJSON[randumNumber].code 
-            user.userCode = randomCode 
-              // user.userCode = "P47E-Xknk"
-            axios.post(this.props.url, user)
-            .then(res => {
-   
-                let header = 'Form submitted successfully!'
-                let paragraph = "Email with Voucher Code has been sent to " + values.email + ". Check your email and good luck!!!"
-                 onSubmitForm(true, header, paragraph)
-            })
-            .catch(err => {
-              console.error(err);
-            });
-            }
-        })
-    }
-    const agreement = 'I consent to receiving updates from Kaplan. I understand that Kaplan will never sell my data and I consent to it being shared with selected third parties for the purposes of performing business services only. Please see our Privacy Policy for further details on how we handle your data. *'
-    return (
-      <form onSubmit={handleSubmit(submit)}>
-        <Field name="firstName" type="text" component={renderField} label="FirstName"/>
-        <Field name="surname" type="text" component={renderField} label="Surname"/>
-        <Field name="email" type="email" component={renderField} label="Email"/>
-        <Field name="age" type="number" component={renderField} label="Age"/>
-        <Field name="postcode" type="text" component={renderField} label="Postcode"/>
-        <Panel>
-          {agreement}
-          <Field className="consentField" name="consent" component={renderCheckboxField} label="I consent" type="checkbox"/>
-        </Panel>
-        <div>
-          <Button type="submit" className="submitButton" disabled={submitting}  bsSize="large" active>Submit</Button>
-        </div>
-      </form>
-  )
-}
-}
-
 //renderTextField
 
 const renderField = ({
@@ -192,6 +138,65 @@ const renderCheckboxField = ({
           (warning &&
          <HelpBlock>{warning}</HelpBlock>))}
    </FormGroup>
+
+
+
+class SyncValidationForm extends React.Component {
+
+  render(){
+
+    const { handleSubmit, pristine, reset, submitting, onSubmitForm } = this.props
+
+
+    const submit = (values) =>  {
+ 
+      usersJSON.map((item ,indx)=> {
+        if (item.email === values.email) {
+
+          let header = 'This Email already exist'
+          let paragraph = 'We are very sorry but you can play with us just one time'
+           onSubmitForm(true, header, paragraph)
+        } else if ((indx === (usersJSON.length-1)) && (item.email !== values.email)) {
+            let user = values
+            let randumNumber = Math.floor((Math.random() * 1000))
+            let randomCode = vaucherJSON[randumNumber].code 
+            user.userCode = randomCode 
+              // user.userCode = "P47E-Xknk"
+            axios.post(this.props.url, user)
+            .then(res => {
+   
+                let header = 'Form submitted successfully!'
+                let paragraph = "Email with Voucher Code has been sent to " + values.email + ". Check your email and good luck!!!"
+                 onSubmitForm(true, header, paragraph)
+            })
+            .catch(err => {
+              console.error(err);
+            });
+            }
+        })
+    }
+    const agreement = 'I consent to receiving updates from Kaplan. I understand that Kaplan will never sell my data and I consent to it being shared with selected third parties for the purposes of performing business services only. Please see our Privacy Policy for further details on how we handle your data. *'
+    return (
+      <form className="formContainer" onSubmit={handleSubmit(submit)}>
+        <PageHeader>Example page header <small>Subtext for header</small></PageHeader>
+        <Field name="firstName" type="text" component={renderField} label="FirstName"/>
+        <Field name="surname" type="text" component={renderField} label="Surname"/>
+        <Field name="email" type="email" component={renderField} label="Email"/>
+        <Field name="age" type="number" component={renderField} label="Age"/>
+        <Field name="postcode" type="text" component={renderField} label="Postcode"/>
+        <Panel>
+          {agreement}
+          <Field className="consentField" name="consent" component={renderCheckboxField} label="I consent" type="checkbox"/>
+        </Panel>
+        <div>
+          <Button type="submit" className="submitButton" disabled={submitting}  bsSize="large" active>Submit</Button>
+        </div>
+      </form>
+  )
+}
+}
+
+
 
 export default reduxForm({
   form: 'syncValidation', // a unique identifier for this form
