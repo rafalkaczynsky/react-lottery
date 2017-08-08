@@ -5,6 +5,7 @@
 
 #videos
 /src/videos
+/public/videos 
 
 # testing
 /coverage
