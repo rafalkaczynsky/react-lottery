@@ -101,8 +101,7 @@ video {
   .lotteryBox {
   background-color: #f9f9f9;
   padding: 20px;
-  max-height: 280px;
-  width: 70%;
+  min-width: 70%;
   margin-top: 10px;
   overflow: auto;
 }
