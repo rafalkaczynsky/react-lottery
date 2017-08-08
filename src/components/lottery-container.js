@@ -93,24 +93,24 @@ class LotteryContainer extends React.Component {
               if ((winnerCode.code === code) && (winnerCode.claimed === false)) {
                      //  ================================== WINN !!!!!!!!!!!! ===================================
                   onWin(true, winnerCode.url)  // tell that is winn event and send proper url with movie to render
-                    alert('tada')
-                  //update winningCodes - set winnerCode.claimed  = true
-                    axios.post('http://localhost:3001/api/winning-codes', winnerCode)
-                    .then(res => {
-                      // .....   
-                    }).catch(err => {
-                        console.error(err);
-                    });       
+                  alert('tada')
                   //........
                    let winnerItem = {}
                    //check user by check code entered // temp I used email
                    users.map((user , indx) => {
                    if (user.userCode === code){           
+                        //update winningCodes - set winnerCode.claimed  = true
+                        axios.post('http://localhost:3001/api/winning-codes', winnerCode)
+                        .then(res => {
+                            // .....   
+                        }).catch(err => {
+                             console.error(err);
+                        });  
+
                         winnerItem.user = user
+                        winnerItem.winnerCode = winnerCode
                     }
                    })
-
-                  winnerItem.winnerCode = winnerCode
 
                   //save user to winners    
                   axios.post('http://localhost:3001/api/winners', winnerItem)
