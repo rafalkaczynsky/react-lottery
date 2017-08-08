@@ -36,7 +36,7 @@ const Root = ({ store }) => (
     <BrowserRouter>
         <div>
             <Route exact path='/' component={KaplanLottery} />
-            <Route path='/checker' component={CodeChecker} />
+            <Route path='/check' component={CodeChecker} />
         </div>
     </BrowserRouter>
   </Provider>
