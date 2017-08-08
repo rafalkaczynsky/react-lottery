@@ -154,7 +154,7 @@ class SyncValidationForm extends React.Component {
         if (item.email === values.email) {
 
           let header = 'This Email already exist'
-          let paragraph = 'We are very sorry but you can play with us just one time'
+          let paragraph = 'We are very sorry but you can play with us just once'
            onSubmitForm(true, header, paragraph)
         } else if ((indx === (usersJSON.length-1)) && (item.email !== values.email)) {
             let user = values

@@ -109,20 +109,22 @@ class LotteryContainer extends React.Component {
 
                         winnerItem.user = user
                         winnerItem.winnerCode = winnerCode
+
+                                       //save user to winners    
+                        axios.post('http://localhost:3001/api/winners', winnerItem)
+                        .then(res => {
+                             // .....   
+                        }).catch(err => {
+                            console.error(err);
+                        });  
                     }
                    })
 
-                  //save user to winners    
-                  axios.post('http://localhost:3001/api/winners', winnerItem)
-                    .then(res => {
-                      // .....   
-                    }).catch(err => {
-                        console.error(err);
-                    });          
+           
               } 
             })
           } else {
-            onWin(true, '../videos/no-win.mp4')       // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
+            onWin(true, '/videos/no-win.mp4')       // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
           }
         } 
       })
