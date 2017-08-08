@@ -7,11 +7,11 @@ export default class RenderMovie extends React.Component {
         const {movieUrl} = this.props
 
         return(
-            <div >
-                <video  width="400">
-                    <source src={movieUrl}  type="video/mp4"/>
-                    <source src={movieUrl}  type="video/ogg"/>
-                        Your browser does not support the video tag.
+            <div>
+                <video className="video-container video-container-overlay" src="no-win.mp4" autoPlay={true} loop >
+                      <source src="no-win.mp4" type="video/mp4"/>
+                      <source src="no-win.ogg" type="video/ogg"/>
+                        Your browser does not support HTML5 video.
                 </video>
             </div>
         )

@@ -122,7 +122,7 @@ class LotteryContainer extends React.Component {
               } 
             })
           } else {
-            onWin(true, '../videos/no-win.mov')       // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
+            onWin(true, '../videos/no-win.mp4')       // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
           }
         } 
       })
