@@ -8,7 +8,7 @@ export default class RenderMovie extends React.Component {
 
         return(
             <div>
-                <video className="video-container video-container-overlay" src="no-win.mp4" autoPlay={true} loop >
+                <video className="video-container video-container-overlay" src="/videos/nowin.mp4" autoPlay={true} loop >
                       <source src="no-win.mp4" type="video/mp4"/>
                       <source src="no-win.ogg" type="video/ogg"/>
                         Your browser does not support HTML5 video.
