@@ -8,14 +8,14 @@ import {RenderMovie} from './'
 
 
  var attempts = 3
-// code generator  
+// code generator
 var voucher_codes = require('voucher-code-generator');
 
-// generate 1000 codes 
+// generate 1000 codes
 var vaucherArray = voucher_codes.generate({
     length: 8,
     count: 1000,
-  
+
 });
 
 function readJSON(file) {
@@ -25,11 +25,12 @@ function readJSON(file) {
     if (request.status == 200)
         return request.responseText;
 };
+var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT
 
-var vaucherJSON = JSON.parse(readJSON('http://localhost:3001/api/codes'));
-var winningCodesJSON = JSON.parse(readJSON('http://localhost:3001/api/winning-codes'));
-var users = JSON.parse(readJSON('http://localhost:3001/api/users'));
-var AllWinners = JSON.parse(readJSON('http://localhost:3001/api/winners'));
+var vaucherJSON = JSON.parse(readJSON(baseurl + "/api/codes"));
+var winningCodesJSON = JSON.parse(readJSON(baseurl +'/api/winning-codes'));
+var users = JSON.parse(readJSON(baseurl +'/api/users'));
+var AllWinners = JSON.parse(readJSON(baseurl +'/api/winners'));
 
 
 // --------------------------- validation --------------------------
@@ -38,9 +39,9 @@ const validate = values => {
   if (!values.code) {
     errors.code = 'Required'
   } else if (values.code.length > 9) {
-    errors.code = 'Must be 10 characters but is more now'
+    errors.code = 'Your code is too long'
   } else if (values.code.length < 9) {
-    errors.code = 'Must be 10 charackters but is less now'
+    errors.code = 'Your code is too short'
   }
 
   return errors
@@ -49,7 +50,7 @@ const validate = values => {
 const warn = values => {
   const warnings = {}
   if (attempts <= 3) {
-    warnings.code = 'You have ' + attempts + 'left.'
+    warnings.code = 'You have ' + attempts + ' attempts left.'
   }
   return warnings
 }
@@ -95,56 +96,60 @@ class LotteryContainer extends React.Component {
               if ((winnerCode.code === code) && (winnerCode.claimed === false)) {
                      //  ================================== WINN !!!!!!!!!!!! ===================================
                   onWin(true, winnerCode.url)  // tell that is winn event and send proper url with movie to render
-                  alert('tada')
                   //........
                    let winnerItem = {}
                    //check user by check code entered // temp I used email
                    users.map((user , indx) => {
-                   if (user.userCode === code){           
+                   if (user.userCode === code){
                         //update winningCodes - set winnerCode.claimed  = true
-                        axios.post('http://localhost:3001/api/winning-codes', winnerCode)
+                        axios.post(baseurl+'/api/winning-codes', winnerCode)
                         .then(res => {
-                            // .....   
+                            // .....
                         }).catch(err => {
                              console.error(err);
-                        });  
+                        });
 
                         winnerItem.user = user
                         winnerItem.winnerCode = winnerCode
 
-                        //save user to winners    
-                        axios.post('http://localhost:3001/api/winners', winnerItem)
+                        //save user to winners
+                        axios.post(baseurl+'/api/winners', winnerItem)
                         .then(res => {
-                             // .....   
+                             // .....
                         }).catch(err => {
                             console.error(err);
-                        });  
+                        });
                     }
                    })
-              } 
+              }
             })
           } else {
             onWin(true, '/videos/no-win.mp4')       // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
           }
-        } 
+        }
       })
 
       if (validCode === false) {
-          alert('invalid code!!!')
           attempts --
-        } else null               // INVALID CODE TYPED 
+          alert('Code invalid, please double check your entry')
+          return null
+        } else null               // INVALID CODE TYPED
 
       this.props.render(true)
   }
 
     return (
       <div>
-        <PageHeader>Example page header <small>Subtext for header</small></PageHeader>
+        <PageHeader>Kaplan Prize Draw <br/><small>Enter your code to see if you have won!</small></PageHeader>
+
         <form onSubmit={handleSubmit(submit)}>
           <Field name="code" type="text" component={renderField} label="Your Code"/>
           <div>
             <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active>Submit</Button>
           </div>
+          <small>
+            You should have received a code when signing up to our newsletter <a href="/">here</a>. If you have subscribed but have not received email, <a href="mailto:admin@mediacabin.co.uk">please notify us now.</a>
+          </small>
         </form>
       </div>
   )
@@ -152,8 +157,7 @@ class LotteryContainer extends React.Component {
 }
 
 export default reduxForm({
-  form: 'syncValidation', 
-  validate, 
-  warn 
+  form: 'syncValidation',
+  validate,
+  warn
 })(LotteryContainer)
-

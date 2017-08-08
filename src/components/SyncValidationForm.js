@@ -22,8 +22,10 @@ function readJSON(file) {
 //   doc.save()
 //})
 
-var vaucherJSON = JSON.parse(readJSON('http://localhost:3001/api/codes'));
-var usersJSON = JSON.parse(readJSON('http://localhost:3001/api/users'));
+var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT
+
+var vaucherJSON = JSON.parse(readJSON(baseurl +'/api/codes'));
+var usersJSON = JSON.parse(readJSON(baseurl +'/api/users'));
 
 // --------------------------- validation --------------------------
 const validate = values => {
@@ -149,7 +151,7 @@ class SyncValidationForm extends React.Component {
 
 
     const submit = (values) =>  {
- 
+
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
 
@@ -159,12 +161,12 @@ class SyncValidationForm extends React.Component {
         } else if ((indx === (usersJSON.length-1)) && (item.email !== values.email)) {
             let user = values
             let randumNumber = Math.floor((Math.random() * 1000))
-            let randomCode = vaucherJSON[randumNumber].code 
-            user.userCode = randomCode 
+            let randomCode = vaucherJSON[randumNumber].code
+            user.userCode = randomCode
               // user.userCode = "P47E-Xknk"
             axios.post(this.props.url, user)
             .then(res => {
-   
+
                 let header = 'Form submitted successfully!'
                 let paragraph = "Email with Voucher Code has been sent to " + values.email + ". Check your email and good luck!!!"
                  onSubmitForm(true, header, paragraph)
@@ -178,18 +180,30 @@ class SyncValidationForm extends React.Component {
     const agreement = 'I consent to receiving updates from Kaplan. I understand that Kaplan will never sell my data and I consent to it being shared with selected third parties for the purposes of performing business services only. Please see our Privacy Policy for further details on how we handle your data. *'
     return (
       <form className="formContainer" onSubmit={handleSubmit(submit)}>
-        <PageHeader>Example page header <small>Subtext for header</small></PageHeader>
-        <Field name="firstName" type="text" component={renderField} label="FirstName"/>
-        <Field name="surname" type="text" component={renderField} label="Surname"/>
-        <Field name="email" type="email" component={renderField} label="Email"/>
+        <Col sm={12} md={12} >
+          <PageHeader>Kaplan Newsletter <br/> <small>Subscribe to be entered into our prize draw</small></PageHeader>
+        </Col>
+        <Col sm={6} md={6} >
+          <Field name="firstName" type="text" component={renderField} label="FirstName"/>
+        </Col>
+        <Col sm={6} md={6} >
+          <Field name="surname" type="text" component={renderField} label="Surname"/>
+        </Col>
+        <Col sm={12} md={12} >
+          <Field name="email" type="email" component={renderField} label="Email"/>
+        </Col>
+        <Col sm={6} md={6} >
         <Field name="age" type="number" component={renderField} label="Age"/>
+        </Col>
+        <Col sm={6} md={6} >
         <Field name="postcode" type="text" component={renderField} label="Postcode"/>
-        <Panel>
-          {agreement}
-          <Field className="consentField" name="consent" component={renderCheckboxField} label="I consent" type="checkbox"/>
-        </Panel>
+        </Col>
+        <Col sm={12} md={12} >
+
+          <Field className="consentField" name="consent" component={renderCheckboxField} label={agreement} type="checkbox"/>
+        </Col>
         <div>
-          <Button type="submit" className="submitButton" disabled={submitting}  bsSize="large" active>Submit</Button>
+          <Button type="submit" className="submitButton" disabled={submitting} bsStyle="primary" bsSize="large" active>Submit</Button>
         </div>
       </form>
   )

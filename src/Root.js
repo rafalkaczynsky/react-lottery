@@ -7,10 +7,12 @@ import CodeCheckerMain from './code-checker-main'
 
 class KaplanLottery extends React.Component{
 
+
     render(){
+        var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT + '/api/users'
         return(
-            <KaplanLotteryMain 
-                url='http://localhost:3001/api/users'
+            <KaplanLotteryMain
+                url={baseurl}
                 pollInterval={2000}
             />
         )
@@ -19,9 +21,10 @@ class KaplanLottery extends React.Component{
 
 class CodeChecker extends React.Component {
     render(){
+        var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT + '/api/users'
         return(
-            <CodeCheckerMain 
-                url='http://localhost:3001/api/users'
+            <CodeCheckerMain
+                url={baseurl}
                 pollInterval={2000}
             />
         )

@@ -16,7 +16,7 @@ var router = express.Router()
 
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
-var port = process.env.API_PORT || 3001
+var port = process.env.REACT_APP_API_PORT || 3001
 //db config
 mongoose.connect('mongodb://rafalkaczynsky1985:paulinka97@ds129723.mlab.com:29723/kaplan-lottery')
 //now we should configure the API to use bodyParser and look for
@@ -78,7 +78,7 @@ router.route('/codes')
         if (err)
             res.send(err);
         });
-    }); 
+    });
  })
 
 //==============================================
