@@ -196,8 +196,6 @@ class SyncValidationForm extends React.Component {
 }
 }
 
-
-
 export default reduxForm({
   form: 'syncValidation', // a unique identifier for this form
   validate, // <--- validation function given to redux-form

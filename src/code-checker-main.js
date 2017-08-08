@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {LotteryContainer, Header, RenderMovie} from './components'
 import './App.css';
 
-
 class CodeCheckerMain extends Component {
   constructor(props){
     super(props)

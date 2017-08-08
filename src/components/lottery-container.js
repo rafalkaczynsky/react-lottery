@@ -6,6 +6,8 @@ import {PageHeader, Button, Form, FormGroup, Col, ControlLabel, FormControl, Che
 
 import {RenderMovie} from './'
 
+
+ var attempts = 3
 // code generator  
 var voucher_codes = require('voucher-code-generator');
 
@@ -46,8 +48,8 @@ const validate = values => {
 // ------------------------- warnings ----------------------------------
 const warn = values => {
   const warnings = {}
-  if (values.attemps < 3) {
-    warnings.attemps = 'You have just' + values.attemps + 'left.'
+  if (attempts <= 3) {
+    warnings.code = 'You have ' + attempts + 'left.'
   }
   return warnings
 }
@@ -73,7 +75,7 @@ const renderField = ({
           (warning &&
          <HelpBlock>{warning}</HelpBlock>))}
    </FormGroup>
-// ====================================================
+
 
 class LotteryContainer extends React.Component {
 
@@ -110,7 +112,7 @@ class LotteryContainer extends React.Component {
                         winnerItem.user = user
                         winnerItem.winnerCode = winnerCode
 
-                                       //save user to winners    
+                        //save user to winners    
                         axios.post('http://localhost:3001/api/winners', winnerItem)
                         .then(res => {
                              // .....   
@@ -119,8 +121,6 @@ class LotteryContainer extends React.Component {
                         });  
                     }
                    })
-
-           
               } 
             })
           } else {
@@ -129,7 +129,10 @@ class LotteryContainer extends React.Component {
         } 
       })
 
-      if (validCode === false) {alert('invalid code!!!')} else null               // INVALID CODE TYPED 
+      if (validCode === false) {
+          alert('invalid code!!!')
+          attempts --
+        } else null               // INVALID CODE TYPED 
 
       this.props.render(true)
   }
@@ -149,8 +152,8 @@ class LotteryContainer extends React.Component {
 }
 
 export default reduxForm({
-  form: 'syncValidation', // a unique identifier for this form
-  validate, // <--- validation function given to redux-form
-  warn // <--- warning function given to redux-form
+  form: 'syncValidation', 
+  validate, 
+  warn 
 })(LotteryContainer)
 
