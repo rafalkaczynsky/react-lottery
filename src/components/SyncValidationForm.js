@@ -12,7 +12,19 @@ function readJSON(file) {
         return request.responseText;
 };
 
+function setUnique(vJSON){
+  let newItem = false;
+  let randumNumber = Math.floor((Math.random() * 1000))
 
+  while (newItem ==false){
+    if(vJSON[randumNumber].used && vJSON[randumNumber].used == true){
+      randumNumber = Math.floor((Math.random() * 1000))
+    }else {
+      newItem = true;
+      return vJSON[randumNumber].code;
+    }
+  }
+}
 
 // var query = { name: 'blablabla' }
 // Model.update( query, { name: ' fewfewfew'}, option, callback)
@@ -155,13 +167,15 @@ class SyncValidationForm extends React.Component {
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
 
-          let header = 'This Email already exist'
-          let paragraph = 'We are very sorry but you can play with us just once'
+          let header = 'Oops, looks like you have already subscribed'
+          let paragraph = 'We are very sorry but you can only play this once'
            onSubmitForm(true, header, paragraph)
         } else if ((indx === (usersJSON.length-1)) && (item.email !== values.email)) {
             let user = values
-            let randumNumber = Math.floor((Math.random() * 1000))
-            let randomCode = vaucherJSON[randumNumber].code
+            let newItem = false;
+            //let randumNumber = Math.floor((Math.random() * 1000))
+            let randomCode = setUnique(vaucherJSON);
+
             user.userCode = randomCode
               // user.userCode = "P47E-Xknk"
             axios.post(this.props.url, user)

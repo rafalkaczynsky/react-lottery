@@ -8,7 +8,8 @@ var Schema = mongoose.Schema;
 
 var codeSchema = new Schema({
     code: String,
-    winning: Boolean
+    winning: Boolean,
+    used: false
 });
 
 

@@ -114,6 +114,7 @@ router.route('/users')
     res.json({ message: 'User successfully created!' });
 
     sendUserEmail(req);
+    updateCodeDB(req.body.userCode);
  });
  });
 
@@ -146,6 +147,16 @@ router.route('/winners')
  });
  });
 
+function updateCodeDB(codeUsed){
+  Code.findOne({ code: codeUsed}, function(err, doc){
+    console.log(doc)
+      doc.used = true
+      doc.save(function(err) {
+      if (err)
+          console.log('updated')
+      });
+  });
+}
 //===================================
 function sendUserEmail(req) {
   var request = sg.emptyRequest({
