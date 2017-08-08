@@ -50,6 +50,17 @@ const validate = values => {
   } else if (Number(values.age) < 18) {
     errors.age = 'Sorry, you must be at least 18 years old'
   }
+
+  if (!values.postcode) {
+    errors.postcode = 'Required'
+  } else if (!/^[A-Z]{1,2}[0-9]{1,2}[A-Z]{0,1} ?[0-9][A-Z]{2}$/i.test(values.postcode)) {
+    errors.postcode = 'Invalid Postcode'
+  }
+
+
+  if (!values.consent) {
+    errors.consent= 'Required'
+  }
   return errors
 }
 // ------------------------- warnings ----------------------------------
@@ -92,7 +103,9 @@ class SyncValidationForm extends React.Component {
   render(){
 
     const { handleSubmit, pristine, reset, submitting, onSubmitForm } = this.props
-    const submit = (values) =>{
+
+
+    const submit = (values) =>  {
  
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
@@ -118,17 +131,18 @@ class SyncValidationForm extends React.Component {
             });
             }
         })
-}
-
+    }
+    const agreement = 'I consent to receiving updates from Kaplan. I understand that Kaplan will never sell my data and I consent to it being shared with selected third parties for the purposes of performing business services only. Please see our Privacy Policy for further details on how we handle your data. *'
     return (
       <form onSubmit={handleSubmit(submit)}>
         <Field name="firstName" type="text" component={renderField} label="FirstName"/>
         <Field name="surname" type="text" component={renderField} label="Surname"/>
         <Field name="email" type="email" component={renderField} label="Email"/>
         <Field name="age" type="number" component={renderField} label="Age"/>
+        <Field name="postcode" type="text" component={renderField} label="Postcode"/>
         <Panel>
-          Some text , and more Lorem ipsum .Some text , and more Lorem ipsum Some text , and more Lorem ipsum  Some text , and more Lorem ipsum  Some text , and more Lorem ipsum  Some text , and more Lorem ipsum
-          <Checkbox>I Agree</Checkbox>
+          {agreement}
+          <Field className="consentField" name="consent" component={renderCheckboxField} label="I consent" type="checkbox"/>
         </Panel>
         <div>
           <Button type="submit" className="submitButton" disabled={submitting}  bsSize="large" active>Submit</Button>
@@ -151,6 +165,25 @@ const renderField = ({
         {label}
       </ControlLabel>
       <FormControl {...input} placeholder={label} type={type} />
+      <FormControl.Feedback />
+      {touched &&
+        ((error &&
+          <HelpBlock>{error}</HelpBlock>
+         ) ||
+          (warning &&
+         <HelpBlock>{warning}</HelpBlock>))}
+   </FormGroup>
+
+const renderCheckboxField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) =>
+  <FormGroup controlId="formValidationError2" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
+      <Checkbox {...input} inline>
+          {label}
+      </Checkbox>
       <FormControl.Feedback />
       {touched &&
         ((error &&

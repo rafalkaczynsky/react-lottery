@@ -48,3 +48,17 @@ html, body {
   text-align: center;
   background-color: lightblue;
 }
+
+checkbox {
+  padding: 0px;
+  margin:0px;
+}
+
+.consentField{
+  margin-top: 20px;
+  width: 0px;
+  height: 0px;
+  padding: 0px;
+  margin:0px;
+}
+

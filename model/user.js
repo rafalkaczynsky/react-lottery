@@ -11,6 +11,7 @@ var userSchema = new Schema({
         surname: String,
         email: String,
         age: String,
+        postcode: String,
         userCode: String
 });
 

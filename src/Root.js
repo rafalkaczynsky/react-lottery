@@ -29,12 +29,12 @@ class xxx extends React.Component {
 
 const Root = ({ store }) => (
   <Provider store={store}>
-<BrowserRouter>
-  <div>
-    <Route path='/about' component={KaplanLottery} />
-    <Route path='/contact' component={xxx} />
-  </div>
-</BrowserRouter>
+    <BrowserRouter>
+        <div>
+            <Route path='/' component={KaplanLottery} />
+            <Route path='/checker' component={xxx} />
+        </div>
+    </BrowserRouter>
   </Provider>
 )
 
