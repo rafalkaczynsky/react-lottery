@@ -2,13 +2,12 @@ import React from 'react'
 import axios from 'axios';
 import { Field, reduxForm } from 'redux-form'
 
-import {PageHeader, Button, Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Panel, HelpBlock} from 'react-bootstrap'
-
-import {RenderMovie} from './'
-
+import {PageHeader, Button,  FormGroup,  ControlLabel, FormControl, HelpBlock} from 'react-bootstrap'
 
 var validCode = false
 var userValidation = false
+
+/*
 // code generator
 var voucher_codes = require('voucher-code-generator');
 
@@ -18,12 +17,13 @@ var vaucherArray = voucher_codes.generate({
     count: 1000,
 
 });
+  */
 
 function readJSON(file) {
     var request = new XMLHttpRequest();
     request.open('GET', file, false);
     request.send(null);
-    if (request.status == 200)
+    if (request.status === 200)
         return request.responseText;
 };
 var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT
@@ -31,7 +31,7 @@ var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_POR
 var vaucherJSON = JSON.parse(readJSON(baseurl + "/api/codes"));
 var winningCodesJSON = JSON.parse(readJSON(baseurl +'/api/winning-codes'));
 var users = JSON.parse(readJSON(baseurl +'/api/users'));
-var AllWinners = JSON.parse(readJSON(baseurl +'/api/winners'));
+//var AllWinners = JSON.parse(readJSON(baseurl +'/api/winners'));
 
 
 // --------------------------- validation --------------------------
@@ -108,7 +108,7 @@ window.addEventListener("keydown", function(event){
   } else backSpacePressed = false
 })
 
-  if ((input.value.length === 4) && (!input.value.includes('-')) || ((input.value.length === 5))){
+  if (((input.value.length === 4) && (!input.value.includes('-'))) || ((input.value.length === 5))){
     
     if ((input.value.length === 5) && (backSpacePressed === true)){
       if(input.value.endsWith("-")) {
@@ -120,8 +120,6 @@ window.addEventListener("keydown", function(event){
     } else if ((input.value.length === 4) && !(input.value.endsWith("-")) && (!input.value.includes('-'))) {input.value += '-' }
 
   }
-
-
 
 return(
   <FormGroup controlId="formValidationError2" bsSize="large" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
@@ -137,7 +135,7 @@ return(
           (warning &&
          <HelpBlock>{warning}</HelpBlock>))}
    </FormGroup>
-)
+ )
 }
 
 
@@ -155,7 +153,7 @@ class LotteryContainer extends React.Component {
 
   render(){
 
-    const { handleSubmit, pristine, reset, submitting, render, onWin} = this.props
+    const { handleSubmit, submitting, onWin} = this.props
 
     const submit = (values) => {
 

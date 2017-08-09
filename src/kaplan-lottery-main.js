@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {PageHeader} from 'react-bootstrap'
 
 import {SyncValidationForm, Header} from './components'
 import './App.css';

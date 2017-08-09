@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import { Router, Route, BrowserRouter} from 'react-router-dom'
+import { Route, BrowserRouter} from 'react-router-dom'
 import KaplanLotteryMain from './kaplan-lottery-main'
 import CodeCheckerMain from './code-checker-main'
 

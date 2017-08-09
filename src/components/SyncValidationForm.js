@@ -2,13 +2,13 @@ import React from 'react'
 import axios from 'axios';
 import { Field, reduxForm } from 'redux-form'
 
-import {Button, Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Panel, HelpBlock, PageHeader} from 'react-bootstrap'
+import {Button, FormGroup, Col, ControlLabel, FormControl, Checkbox, HelpBlock, PageHeader} from 'react-bootstrap'
 
 function readJSON(file) {
     var request = new XMLHttpRequest();
     request.open('GET', file, false);
     request.send(null);
-    if (request.status == 200)
+    if (request.status === 200)
         return request.responseText;
 };
 
@@ -16,8 +16,8 @@ function setUnique(vJSON){
   let newItem = false;
   let randumNumber = Math.floor((Math.random() * 1000))
 
-  while (newItem ==false){
-    if(vJSON[randumNumber].used && vJSON[randumNumber].used == true){
+  while (newItem === false){
+    if(vJSON[randumNumber].used && vJSON[randumNumber].used === true){
       randumNumber = Math.floor((Math.random() * 1000))
     }else {
       newItem = true;
@@ -86,34 +86,6 @@ const warn = values => {
   return warnings
 }
 
-function loadCommentsFromServer() {
-    axios.get(this.props.url)
-        .then(res => {
-        this.setState({ data: res.data });
-    })
- }
-
-//replace the filler with:
-function handleCommentSubmit(comment) {
- axios.post(this.props.url, comment)
- .then(res => {
- this.setState({ data: res });
- })
- .catch(err => {
- console.error(err);
- });
-}
-
-
-/*
- componentDidMount() {
-    this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
- }
-*/
-
-//renderTextField
-
 const renderField = ({
   input,
   label,
@@ -159,20 +131,20 @@ class SyncValidationForm extends React.Component {
 
   render(){
 
-    const { handleSubmit, pristine, reset, submitting, onSubmitForm } = this.props
+    const { handleSubmit, submitting, onSubmitForm } = this.props
 
 
     const submit = (values) =>  {
-
+      alert('Submit works')
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
 
           let header = 'Oops, looks like you have already subscribed'
           let paragraph = 'We are very sorry but you can only play this once'
            onSubmitForm(true, header, paragraph)
-        } else if ((indx === (usersJSON.length-1)) && (item.email !== values.email)) {
+        } else if ((indx === (usersJSON.length -1)) && (item.email !== values.email)) {
             let user = values
-            let newItem = false;
+            //let newItem = false;
             //let randumNumber = Math.floor((Math.random() * 1000))
             let randomCode = setUnique(vaucherJSON);
 
