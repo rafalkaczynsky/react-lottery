@@ -87,15 +87,43 @@ const warn = values => {
 
   return warnings
 }
+  var backSpacePressed = false
 
 //renderTextField
 
 const renderField = ({
   input,
+  value,
   label,
   type,
+
   meta: { touched, error, warning }
-}) =>
+}) => {
+
+
+
+window.addEventListener("keydown", function(event){
+  if (event.keyCode === 8) {
+    backSpacePressed = true
+  } else backSpacePressed = false
+})
+
+  if ((input.value.length === 4) && (!input.value.includes('-')) || ((input.value.length === 5))){
+    
+    if ((input.value.length === 5) && (backSpacePressed === true)){
+      if(input.value.endsWith("-")) {
+        input.value= input.value.substring(0, input.value.length - 1);
+    }
+
+    } else if ((input.value.length === 4) && (backSpacePressed === false)){
+      input.value += '-'
+    } else if ((input.value.length === 4) && !(input.value.endsWith("-")) && (!input.value.includes('-'))) {input.value += '-' }
+
+  }
+
+
+
+return(
   <FormGroup controlId="formValidationError2" bsSize="large" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
       <ControlLabel>
         {label}
@@ -109,9 +137,21 @@ const renderField = ({
           (warning &&
          <HelpBlock>{warning}</HelpBlock>))}
    </FormGroup>
+)
+}
 
 
 class LotteryContainer extends React.Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      codeValue: String,
+    }
+  }
+
+
 
   render(){
 
@@ -127,14 +167,7 @@ class LotteryContainer extends React.Component {
           if (item.winning === true) {
             winningCodesJSON.map((winnerCode, indx)=> {
               if ((winnerCode.code === code) && (winnerCode.claimed === false)){
-                // I removed && (winnerCode.claimed === false)
-                //better perhaps to display text that says: this has already been claimged
-
                      //  ================================== WINN !!!!!!!!!!!! ===================================
-                  // tell that is winn event and send proper url with movie to render
-                  //........
-                //  if(winnerCode.claimed != true){
-
                    onWin(true, winnerCode.url)  
 
                    let winnerItem = {}
@@ -163,10 +196,6 @@ class LotteryContainer extends React.Component {
                         
                     }
                    })
-            //     }//endif
-            //     else{
-            //       alert('this prize has already been claimed')
-            //     }
               }
             })
           } else {
@@ -183,7 +212,7 @@ class LotteryContainer extends React.Component {
         <PageHeader>Kaplan Prize Draw <br/><small>Enter your code to see if you have won!</small></PageHeader>
 
         <form onSubmit={handleSubmit(submit)}>
-          <Field name="code" type="text" component={renderField} label="Your Code"/>
+          <Field name="code" value={this.state.codeValue}type="text" component={renderField} label="Your Code" />
           <div>
             <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active>Submit</Button>
           </div>
