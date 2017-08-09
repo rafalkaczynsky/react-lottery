@@ -135,7 +135,7 @@ class SyncValidationForm extends React.Component {
 
 
     const submit = (values) =>  {
-
+      alert('Submit works')
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
 

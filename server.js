@@ -246,10 +246,35 @@ function sendWinnerEmail(user,title,description) {
 }
 
 //Use our router configuration when we call /api
-
 app.use('/api', router);
-//app.all('*', requireAuthentication, loadUser);
 //starts the server and listens for requests
+
+
+app.use('/api', (req, res) => {
+  const method = req.method.toLowerCase();
+  const headers = req.headers;
+  const url = 'your_actual_api_url';
+
+  // Proxy request
+  const proxyRequest = req.pipe(
+    request({
+      url,
+      headers,
+      method,
+    })
+  );
+
+  const data = [];
+  proxyRequest.on('data', (chunk) => {
+    data.push(chunk);
+  });
+
+  proxyRequest.on('end', () => {
+    const { response } = proxyRequest;
+    const buf = Buffer.concat(data).toString();
+    res.status(response.statusCode).send(buf);
+  });
+});
 
 app.listen(port, function() {
  console.log(`api running on port ${port}`);
