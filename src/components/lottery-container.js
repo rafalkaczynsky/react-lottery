@@ -7,7 +7,7 @@ import {PageHeader, Button, Form, FormGroup, Col, ControlLabel, FormControl, Che
 import {RenderMovie} from './'
 
 
- var attempts = 3
+var validCode = false
 // code generator
 var voucher_codes = require('voucher-code-generator');
 
@@ -42,16 +42,18 @@ const validate = values => {
     errors.code = 'Your code is too long'
   } else if (values.code.length < 9) {
     errors.code = 'Your code is too short'
-  }
+  } else if (validCode === false ) {
+    errors.code = 'Code invalid, please double check your entry'
+  } 
+
+   //'please check your code
 
   return errors
 }
 // ------------------------- warnings ----------------------------------
 const warn = values => {
   const warnings = {}
-  if (attempts <= 3) {
-    warnings.code = 'You have ' + attempts + ' attempts left.'
-  }
+
   return warnings
 }
 
@@ -85,7 +87,7 @@ class LotteryContainer extends React.Component {
     const { handleSubmit, pristine, reset, submitting, render, onWin} = this.props
 
     const submit = (values) => {
-      let validCode = false
+
       let code = String(values.code)
 
       vaucherJSON.map((item)=> {
@@ -98,13 +100,13 @@ class LotteryContainer extends React.Component {
                 //better perhaps to display text that says: this has already been claimged
 
                      //  ================================== WINN !!!!!!!!!!!! ===================================
-                  onWin(true, winnerCode.url)  // tell that is winn event and send proper url with movie to render
+                  // tell that is winn event and send proper url with movie to render
                   //........
                 //  if(winnerCode.claimed != true){
 
 
                    let winnerItem = {}
-                   //check user by check code entered // temp I used email
+                   //check user by check code entered
                    users.map((user , indx) => {
                    if (user.userCode === code){
                         //update winningCodes - set winnerCode.claimed  = true
@@ -125,6 +127,8 @@ class LotteryContainer extends React.Component {
                         }).catch(err => {
                             console.error(err);
                         });
+
+                        onWin(true, winnerCode.url)  
                     }
                    })
             //     }//endif
@@ -138,12 +142,6 @@ class LotteryContainer extends React.Component {
           }
         }
       })
-
-      if (validCode === false) {
-          attempts --
-          alert('Code invalid, please double check your entry')
-          return null
-        } else null               // INVALID CODE TYPED
 
       this.props.render(true)
   }
