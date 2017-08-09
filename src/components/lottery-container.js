@@ -8,6 +8,7 @@ import {RenderMovie} from './'
 
 
 var validCode = false
+var userValidation = false
 // code generator
 var voucher_codes = require('voucher-code-generator');
 
@@ -38,6 +39,7 @@ const validate = values => {
   const errors = {}
 
    validCode = false
+   userValidation = false
 
    vaucherJSON.map((item)=> {
         if (item.code === values.code ){
@@ -45,6 +47,11 @@ const validate = values => {
         }
    })
 
+   users.map((user , indx) => {
+      if (user.userCode === values.code){
+        userValidation = true
+      }
+  })
 
   if (!values.code) {
     errors.code = 'Required'
@@ -54,7 +61,9 @@ const validate = values => {
     errors.code = 'Your code is too short'
   } else if (validCode === false ) {
     errors.code = 'Code invalid, please double check your entry'
-  } else {
+  } else if (userValidation === false){
+    errors.code = 'This code is not assign to you'  
+  }else {
 
    vaucherJSON.map((item)=> {
         if (item.code === values.code ){
@@ -126,6 +135,7 @@ class LotteryContainer extends React.Component {
                   //........
                 //  if(winnerCode.claimed != true){
 
+                   onWin(true, winnerCode.url)  
 
                    let winnerItem = {}
                    //check user by check code entered
@@ -150,7 +160,7 @@ class LotteryContainer extends React.Component {
                             console.error(err);
                         });
 
-                        onWin(true, winnerCode.url)  
+                        
                     }
                    })
             //     }//endif
