@@ -36,6 +36,16 @@ var AllWinners = JSON.parse(readJSON(baseurl +'/api/winners'));
 // --------------------------- validation --------------------------
 const validate = values => {
   const errors = {}
+
+   validCode = false
+
+   vaucherJSON.map((item)=> {
+        if (item.code === values.code ){
+          validCode = true
+        }
+   })
+
+
   if (!values.code) {
     errors.code = 'Required'
   } else if (values.code.length > 9) {
@@ -44,9 +54,21 @@ const validate = values => {
     errors.code = 'Your code is too short'
   } else if (validCode === false ) {
     errors.code = 'Code invalid, please double check your entry'
-  } 
+  } else {
 
-   //'please check your code
+   vaucherJSON.map((item)=> {
+        if (item.code === values.code ){
+          if (item.winning === true) {
+            winningCodesJSON.map((winnerCode, indx)=> {
+              if ((winnerCode.code === item.code) && (winnerCode.claimed === true)){ 
+                  errors.code = 'This has been already claimed'
+              }     
+            })
+          }
+        }
+   })
+
+  }
 
   return errors
 }
@@ -95,7 +117,7 @@ class LotteryContainer extends React.Component {
           validCode = true
           if (item.winning === true) {
             winningCodesJSON.map((winnerCode, indx)=> {
-              if (winnerCode.code === code) {
+              if ((winnerCode.code === code) && (winnerCode.claimed === false)){
                 // I removed && (winnerCode.claimed === false)
                 //better perhaps to display text that says: this has already been claimged
 
