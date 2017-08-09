@@ -77,6 +77,7 @@ router.route('/codes')
         doc.save(function(err) {
         if (err)
             res.send(err);
+
         });
     });
  })
@@ -132,7 +133,6 @@ router.route('/winners')
  })
 
 .post(function(req, res) {
-
     var winner = new Winner();
 
     winner.user = req.body.user
@@ -142,6 +142,8 @@ router.route('/winners')
     winner.save(function(err) {
     if (err)
     res.send(err);
+
+    sendWinnerEmail(req.body.user, req.body.winnerCode.title,req.body.winnerCode.description)
     res.json({ message: 'Winner successfully created!' });
 
  });
@@ -200,7 +202,48 @@ function sendUserEmail(req) {
   });
 }
 
+//===================================
+function sendWinnerEmail(user,title,description) {
+  var request = sg.emptyRequest({
+    method: 'POST',
+    path: '/v3/mail/send',
+    body: {
+      personalizations: [
+        {
+          to: [
+            {
+              email: user.email
+            }
+          ],
+          bcc: [
+            {
+              email: 'admin@mediacabin.co.uk'
+            }
+          ],
+          subject: 'New Kaplan User',
+          "substitutions": {
+            ":title":  title,
+            ":description":  description,
+          },
+        }
+      ],
+      from: {
+        email: 'kaplan@mediacabin.co.uk'
+      },
+      template_id: "23fb4e4c-93ae-4971-a356-9f48ad4fd9fd",
 
+    }
+  });
+
+  sg.API(request, function (error, response) {
+    if (error) {
+      console.log('Error response received')
+    }
+    console.log(response.statusCode)
+    console.log(response.body)
+    console.log(response.headers)
+  });
+}
 
 //Use our router configuration when we call /api
 app.use('/api', router);

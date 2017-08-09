@@ -93,10 +93,16 @@ class LotteryContainer extends React.Component {
           validCode = true
           if (item.winning === true) {
             winningCodesJSON.map((winnerCode, indx)=> {
-              if ((winnerCode.code === code) && (winnerCode.claimed === false)) {
+              if (winnerCode.code === code) {
+                // I removed && (winnerCode.claimed === false)
+                //better perhaps to display text that says: this has already been claimged
+
                      //  ================================== WINN !!!!!!!!!!!! ===================================
                   onWin(true, winnerCode.url)  // tell that is winn event and send proper url with movie to render
                   //........
+                //  if(winnerCode.claimed != true){
+
+
                    let winnerItem = {}
                    //check user by check code entered // temp I used email
                    users.map((user , indx) => {
@@ -121,6 +127,10 @@ class LotteryContainer extends React.Component {
                         });
                     }
                    })
+            //     }//endif
+            //     else{
+            //       alert('this prize has already been claimed')
+            //     }
               }
             })
           } else {
