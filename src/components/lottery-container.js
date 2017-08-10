@@ -131,6 +131,10 @@ class LotteryContainer extends React.Component {
     }
   }
 
+  componentDidMount(){
+       document.getElementById('fliper').setAttribute('class','flipAnimationContainer lotteryContainer');
+  }
+
 
 
   render(){
@@ -180,7 +184,8 @@ class LotteryContainer extends React.Component {
             })
           } else {
              // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
-            handleAll('/videos/no-win2.mp4', true)
+            handleAll('/videos/no-win.mp4', true)
+            document.getElementsByTagName('video')[0].play();
           }
         }
       })
@@ -188,9 +193,11 @@ class LotteryContainer extends React.Component {
       this.props.render(true)
   }
 
+    let header1 = header.substring(0, 12);
+    let header2 = header.substring(13)
     return (
-      <Col className="lotteryContainer"  sm={12} md={12} xs={12} >
-        <PageHeader>{header}<br/><small>{paragraph}</small></PageHeader>
+      <Col  id="fliper" className="lotteryContainer"  sm={12} md={12} xs={12} >
+        <PageHeader className="pageHeader">{header1}<br/>{header2}<br/><small>{paragraph}</small></PageHeader>
         <form onSubmit={handleSubmit(submit)}>
           <Field name="code" value={this.state.codeValue} type="text" component={renderField} label="Your Code" />
           <div>

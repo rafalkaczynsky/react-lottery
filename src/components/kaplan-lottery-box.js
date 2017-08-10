@@ -46,13 +46,11 @@ class KaplanLotteryBox extends Component {
             />          
         }
         {!this.state.isFormSubmitted && (
-          <div>
             <SyncValidationForm 
               url={this.props.url}
               pollInterval={this.props.poll}       
               setFeedBack={this.handleSetFeedBack.bind(this)}
             /> 
-          </div>
         )}
       </div>
     );

@@ -161,8 +161,8 @@ class SyncValidationForm extends React.Component {
             axios.post(this.props.url, user)
             .then(res => {
 
-              let header = 'Form submitted successfully!'
-              let paragraph = "Your Voucher Code is  " + user.userCode + ". Good luck!!!"
+              let header = 'Your Code is:' + user.userCode
+              let paragraph = "Enter it below to see if you have won!"
               setFeedBack(true, header, paragraph)
             })
             .catch(err => {
@@ -176,9 +176,6 @@ class SyncValidationForm extends React.Component {
 
     return (
       <form className="formContainer" onSubmit={handleSubmit(submit)}>
-        <Col sm={12} md={12} >
-          <PageHeader>Kaplan Newsletter <br/> <small>Subscribe to be entered into our prize draw</small></PageHeader>
-        </Col>
         <Col sm={6} md={6} >
           <Field name="firstName" type="text" component={renderField} label="FirstName"/>
         </Col>
