@@ -30,7 +30,7 @@ class KaplanLotteryBox extends Component {
 
     return (
       <div>
-        <p className="arrow_box">To crack the case simply fill in your details to reveal your pincode. Enter this into the briefcase to see if you’re a winner. There will be prizes every day until **** so if you aren’t a lucky winner you can try again tomorrow.</p>
+        <p className="arrow_box">To crack the case simply fill in your details to reveal your pincode. Enter this into the briefcase to see if you’re a winner. There will be prizes every day until the 11th of September so if you aren’t a lucky winner you can try again tomorrow.</p>
 
         <div className="app">
           {this.state.isFormSubmitted &&
