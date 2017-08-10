@@ -1,12 +1,16 @@
+/* general */
+
 html, body {
   width: 100%;
   height: 100%;
 
   font-size: 16px;
 }
+
 .submitButton{
   width: 100%;
 }
+
 .header {
   background-color:#39408d;
   width: 100%;
@@ -18,17 +22,17 @@ html, body {
 .headerLogo {
   height: 95%;
 }
+
 /* ---------- form ---------- */
 
 .page-header {
   margin-top:0 !important;
 }
 
-.formContainer {
+.formContainer, .lotteryContainer {
   margin: 40px auto;
   border-radius: 5px;
   padding: 50px;
-  max-width: 600px;
   background-color: #f9f9f9;
   border-radius: 9px;
   -webkit-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
@@ -55,41 +59,23 @@ checkbox {
 }
 
 
-/* --------------- code checker -------------------- */
+/* code checker */
 
 .App {
 
 }
 
-.container{
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.lotteryBox {
+.MovieBox {
   background-color: #f9f9f9;
-  padding: 40px;
   border-radius: 9px;
   -webkit-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
   -moz-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
   box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
-  max-width: 700px;
   max-height: 500px;
 }
 
-.movieBox {
-  width: 100%;
-  height: 100%
-}
-
-.movieBox > img{
-
-}
-
 video {
+  border-radius: 9px;
   display: block;
   margin: 0;
   padding: 0;
@@ -98,13 +84,7 @@ video {
 }
 
 @media screen and (max-height: 520px) {
-  .lotteryBox {
-  background-color: #f9f9f9;
-  padding: 20px;
-  min-width: 70%;
-  margin-top: 10px;
-  overflow: auto;
-}
+
 h1 {
   font-size: 2em;
   margin:0px;
@@ -115,4 +95,26 @@ h1 {
   margin-top: 10px;
 }
 
+}
+
+
+/*  App.js */
+
+.contentContainer{
+  margin-top: 50px;
+  width: 100%;
+}
+.mainImageContainer {
+  margin-bottom: 30px;
+}
+
+.radioButtons{
+  display: flex;
+  flex:1;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.radioButtons > label {
+  margin-right: 14px;
 }

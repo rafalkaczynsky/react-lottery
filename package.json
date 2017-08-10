@@ -12,6 +12,7 @@
     "nodemon": "^1.11.0",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
+    "react-bootstrap-date-picker": "^5.1.0",
     "react-dom": "^15.6.1",
     "react-html5video": "^2.3.0",
     "react-redux": "^5.0.5",
@@ -19,6 +20,7 @@
     "react-router-dom": "^4.1.2",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
+    "reload": "^2.2.1",
     "sendgrid": "^5.2.0",
     "voucher-code-generator": "^1.1.1"
   },

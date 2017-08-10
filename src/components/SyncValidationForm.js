@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form'
 
 import {Button, FormGroup, Col, ControlLabel, FormControl, Checkbox, HelpBlock, PageHeader} from 'react-bootstrap'
 
+var DatePicker = require("react-bootstrap-date-picker");
+
 function readJSON(file) {
     var request = new XMLHttpRequest();
     request.open('GET', file, false);
@@ -25,14 +27,6 @@ function setUnique(vJSON){
     }
   }
 }
-
-// var query = { name: 'blablabla' }
-// Model.update( query, { name: ' fewfewfew'}, option, callback)
-
-// Model.findOne({ name: ' borne'}, function(err, doc){
-//   doc.name = 'bkdsjkdasd'
-//   doc.save()
-//})
 
 var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT
 
@@ -57,12 +51,8 @@ const validate = values => {
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
-  if (!values.age) {
-    errors.age = 'Required'
-  } else if (isNaN(Number(values.age))) {
-    errors.age = 'Must be a number'
-  } else if (Number(values.age) < 18) {
-    errors.age = 'Sorry, you must be at least 18 years old'
+  if (!values.dob) {
+    errors.dob = 'Required'
   }
 
   if (!values.postcode) {
@@ -71,10 +61,10 @@ const validate = values => {
     errors.postcode = 'Invalid Postcode'
   }
 
-
   if (!values.consent) {
     errors.consent= 'Required'
   }
+
   return errors
 }
 // ------------------------- warnings ----------------------------------
@@ -126,22 +116,40 @@ const renderCheckboxField = ({
    </FormGroup>
 
 
+const renderDateInputField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) =>
+  <FormGroup controlId="formValidationError2" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
+      <ControlLabel>{label}</ControlLabel>
+      <DatePicker id="datepicker"  {...input} />
+      <FormControl.Feedback />
+      {touched &&
+        ((error &&
+          <HelpBlock>{error}</HelpBlock>
+         ) ||
+          (warning &&
+         <HelpBlock>{warning}</HelpBlock>))}
+   </FormGroup>
+
+
 
 class SyncValidationForm extends React.Component {
 
   render(){
 
-    const { handleSubmit, submitting, onSubmitForm } = this.props
-
+    const { handleSubmit, submitting, setFeedBack } = this.props
 
     const submit = (values) =>  {
-      alert('Submit works')
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
 
           let header = 'Oops, looks like you have already subscribed'
           let paragraph = 'We are very sorry but you can only play this once'
-           onSubmitForm(true, header, paragraph)
+
+           setFeedBack(true, header, paragraph)
         } else if ((indx === (usersJSON.length -1)) && (item.email !== values.email)) {
             let user = values
             //let newItem = false;
@@ -153,9 +161,9 @@ class SyncValidationForm extends React.Component {
             axios.post(this.props.url, user)
             .then(res => {
 
-                let header = 'Form submitted successfully!'
-                let paragraph = "Email with Voucher Code has been sent to " + values.email + ". Check your email and good luck!!!"
-                 onSubmitForm(true, header, paragraph)
+              let header = 'Form submitted successfully!'
+              let paragraph = "Your Voucher Code is  " + user.userCode + ". Good luck!!!"
+              setFeedBack(true, header, paragraph)
             })
             .catch(err => {
               console.error(err);
@@ -164,6 +172,8 @@ class SyncValidationForm extends React.Component {
         })
     }
     const agreement = 'I consent to receiving updates from Kaplan. I understand that Kaplan will never sell my data and I consent to it being shared with selected third parties for the purposes of performing business services only. Please see our Privacy Policy for further details on how we handle your data. *'
+    const radioLabel = 'Are you currently looking for an Apprenticeship?'
+
     return (
       <form className="formContainer" onSubmit={handleSubmit(submit)}>
         <Col sm={12} md={12} >
@@ -179,13 +189,28 @@ class SyncValidationForm extends React.Component {
           <Field name="email" type="email" component={renderField} label="Email"/>
         </Col>
         <Col sm={6} md={6} >
-        <Field name="age" type="number" component={renderField} label="Age"/>
+        <Field name="dob" type="number" component={renderDateInputField} label="Date of birth"/>
         </Col>
         <Col sm={6} md={6} >
         <Field name="postcode" type="text" component={renderField} label="Postcode"/>
         </Col>
         <Col sm={12} md={12} >
-
+          <div>
+            {radioLabel} 
+          </div>
+          <Col sm={12} md={12} className="radioButtons" >
+          <label>
+            <Field name="apprenticeship" component="input" type="radio" value="Yes"/>{' '} Yes
+          </label>
+          <label>
+            <Field name="apprenticeship" component="input" type="radio" value="Yes" />{' '} No
+          </label>
+          <label>
+            <Field name="apprenticeship" component="input" type="radio" value="Yes" />{' '} Undecided
+          </label>
+          </Col>
+        </Col>
+        <Col sm={12} md={12} >
           <Field className="consentField" name="consent" component={renderCheckboxField} label={agreement} type="checkbox"/>
         </Col>
         <div>
@@ -197,7 +222,7 @@ class SyncValidationForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'syncValidation', // a unique identifier for this form
-  validate, // <--- validation function given to redux-form
-  warn // <--- warning function given to redux-form
+  form: 'syncValidation', 
+  validate,
+  warn 
 })(SyncValidationForm)

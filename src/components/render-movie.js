@@ -4,11 +4,13 @@ export default class RenderMovie extends React.Component {
 
     render(){
 
-        const {movieUrl} = this.props
+        const {movieUrl, autoPlay} = this.props
+
+        const movie = movieUrl !== '' ? movieUrl : '/videos/no-win.mp4'
 
         return(
-                <video src={movieUrl} autoPlay={true} >
-                      <source src={movieUrl} type="video/mp4"/>
+                <video src={movie} autoPlay={autoPlay} >
+                      <source src={movie} type="video/mp4"/>
                         Your browser does not support HTML5 video.
                 </video>
         )

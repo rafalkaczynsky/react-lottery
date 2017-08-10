@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 
 import { createStore, combineReducers } from 'redux'
 import { reducer as formReducer} from 'redux-form'
+import { Provider } from 'react-redux'
 
 import './index.css';
-import Root from './Root';
+import App from './App';
 
 
 const rootReducer = combineReducers({
@@ -16,7 +17,9 @@ const store = createStore(rootReducer)
 
 
 ReactDOM.render(
-  <Root store={store} />,
+  <Provider store={store}>
+      <App />
+  </Provider>,
   document.getElementById('root')
 )
 

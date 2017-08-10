@@ -10,8 +10,10 @@ var userSchema = new Schema({
         firstName: String,
         surname: String,
         email: String,
-        age: String,
+        dob: Date,
         postcode: String,
+        apprenticeship: String,
+        consent: Boolean,
         userCode: String
 });
 
