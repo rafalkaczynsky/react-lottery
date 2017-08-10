@@ -50,15 +50,15 @@ const validate = values => {
     errors.code = 'Code invalid, please double check your entry'
   } //else if (userValidation === false){
    // errors.code = 'This code is not assign to you'  }
-   
+
    else {
    vaucherJSON.map((item)=> {
         if (item.code === values.code ){
           if (item.winning === true) {
             winningCodesJSON.map((winnerCode, indx)=> {
-              if ((winnerCode.code === item.code) && (winnerCode.claimed === true)){ 
+              if ((winnerCode.code === item.code) && (winnerCode.claimed === true)){
                   errors.code = 'This has been already claimed'
-              }     
+              }
             })
           }
         }
@@ -92,7 +92,7 @@ window.addEventListener("keydown", function(event){
 })
 
   if (((input.value.length === 4) && (!input.value.includes('-'))) || ((input.value.length === 5))){
-    
+
     if ((input.value.length === 5) && (backSpacePressed === true)){
       if(input.value.endsWith("-")) {
         input.value= input.value.substring(0, input.value.length - 1);
@@ -152,7 +152,7 @@ class LotteryContainer extends React.Component {
             winningCodesJSON.map((winnerCode, indx)=> {
               if ((winnerCode.code === code) && (winnerCode.claimed === false)){
                      //  WINN !!!!!!!!!!!!
- 
+
                    handleAll(winnerCode.url, true)
                    let winnerItem = {}
                    //check user by check code entered
@@ -177,7 +177,7 @@ class LotteryContainer extends React.Component {
                             console.error(err);
                         });
 
-    
+
                     }
                    })
               }
@@ -185,6 +185,7 @@ class LotteryContainer extends React.Component {
           } else {
              // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
             handleAll('/videos/no-win.mp4', true)
+            window.location.hash = 'video-box';
             document.getElementsByTagName('video')[0].play();
           }
         }

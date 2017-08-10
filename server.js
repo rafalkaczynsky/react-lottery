@@ -79,7 +79,7 @@ router.route('/users')
     });
  })
 
- 
+
  .post(function(req, res) {
     var user = new User()
 
@@ -89,7 +89,7 @@ router.route('/users')
     user.dob = req.body.dob
     user.postcode = req.body.postcode
     user.apprenticeship = req.body.apprenticeship
-    user.consent = req.body.consent, 
+    user.consent = req.body.consent,
     user.userCode = req.body.userCode
 
 

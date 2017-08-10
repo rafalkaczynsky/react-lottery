@@ -191,9 +191,9 @@ class SyncValidationForm extends React.Component {
         <Col sm={6} md={6} >
         <Field name="postcode" type="text" component={renderField} label="Postcode"/>
         </Col>
-        <Col className="radioButtons" sm={12} md={12} >
+        <Col sm={12} md={12} >
           <div>
-            {radioLabel} 
+            {radioLabel}
           </div>
           <Col sm={12} md={12} className="radioButtons" >
           <label>
@@ -219,7 +219,7 @@ class SyncValidationForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'syncValidation', 
+  form: 'syncValidation',
   validate,
-  warn 
+  warn
 })(SyncValidationForm)

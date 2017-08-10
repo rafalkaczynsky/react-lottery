@@ -12,6 +12,12 @@ body{
   background-size:1280px;
   background-position: left top;
 }
+video::-webkit-media-controls {
+    display:none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}
 .arrow_box {
 	position: fixed;
 	background: #39408d;
@@ -71,7 +77,6 @@ body{
 
 .app {
     perspective: 1000px;
-    transform: rotateY(180deg);
 }
 /* ---------- form ---------- */
 
@@ -99,12 +104,10 @@ body{
  transition: 0.6s;
  transform-style: preserve-3d;
  position: relative;
- transform: rotateY(180deg);
+ transform: rotateY(360deg);
 }
 
-.formContainer{
-  transform: rotateY(180deg);
-}
+
 .FeedbackContainer{
   padding: 20px;
   text-align: center;
@@ -222,7 +225,7 @@ h1 {
 @media screen and (max-width: 768px) {
   .maxWidthFrame{
     max-width:960px;
-
+    padding: 20px;
     background-color: #ffffff;
   }
   .maxWidthContainer{
