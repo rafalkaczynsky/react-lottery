@@ -18,7 +18,7 @@ export default class App extends React.Component {
         this.setState({
             movieUrl: movieUrl,
             autoPlay: autoPlay
-        })    
+        })
     }
 
     render(){
@@ -32,24 +32,25 @@ export default class App extends React.Component {
                 <img src={require('./images/image.jpg')} width="100%" alt="mainPicture"/>
             </div>*/}
             <div className="maxWidthFrame" >
-                <Col  sm={12} md={12} xs={12}>
-                <Col  className="page-header">
-                    <h2>Crack the code to our accountant’s briefcase and unlock the start to your career.</h2>
+                <Col className="maxWidthContainer" sm={12} md={12} xs={12}>
+                <Col sm={12} md={12} >
+                  <Col  className="page-header">
+                      <h2>Crack the code to our accountant’s briefcase and unlock the start to your career.</h2>
+                  </Col>
                 </Col>
                     <Col sm={4} md={4} xs={12} className="leftSideContent">
-                    
+
                             <p>The life of an accountant is an interesting one, you never know with who or where you might end up working. All businesses need an accountant and ours have been busy collecting prizes wherever they go.</p>
-                            <p>To crack the case simply fill in your details to reveal your pincode. Enter this into the briefcase to see if you’re a winner. There will be prizes every day until **** so if you aren’t a lucky winner you can try again tomorrow.</p>          
-                            <h3>Could this be the start of your career?</h3>             
-                            <p>If you’re getting results in August you may be thinking about what to do next. An Apprenticeship offers the best of both worlds, you can start earning straight away while still learning. We’ve got loads of Apprenticeships available in accountancy, financial services, customer services and administration. Head over to our jobs board now and 
+                            <h3>Could this be the start of your career?</h3>
+                            <p>If you’re getting results in August you may be thinking about what to do next. An Apprenticeship offers the best of both worlds, you can start earning straight away while still learning. We’ve got loads of Apprenticeships available in accountancy, financial services, customer services and administration. Head over to our jobs board now and
                                 <a href="https://kaplan.co.uk/apprenticeships/jobs-board">apply for your Apprenticeship.</a>
-                            </p>    
-                            <h3>What next?</h3>     
+                            </p>
+                            <h3>What next?</h3>
                             <p>Sign up to receive our monthly newsletter where we’ll send you the Apprenticeships available in your area
                                 <a href="https://kaplan.co.uk/apprenticeships/newsletter">Sign up now</a>
-                            </p>               
+                            </p>
 
-                            <p>Want to know more about what it's like to be an Apprentice?
+                            <p>Want to know more about what it is like to be an Apprentice?
                                 <a href="https://kaplan.co.uk/apprenticeships/talent-academy/apprentice-stories">Check out our apprentice stories. </a>
                             </p>
 
@@ -66,11 +67,11 @@ export default class App extends React.Component {
                                     or a
                                 <a href="https://kaplan.co.uk/apprenticeships/talent-academy/news/detail/talent-academy/2017/03/06/interview-with-a-production-accountant"> production accountant working in the film industry</a>
                             </p>
-        
+
                     </Col>
-                   
+
                     <Col sm={8} md={8} xs={12} className="rightSideContent">
-                        <MovieBox 
+                        <MovieBox
                             movieUrl={this.state.movieUrl}
                             autoPlay={this.state.autoPlay}
                         />
@@ -78,7 +79,7 @@ export default class App extends React.Component {
                             url={baseurl}
                             pollInterval={2000}
                             handleAll={this.handleAll.bind(this)}
-                        />            
+                        />
                     </Col>
                 </Col>
             </div>
@@ -86,6 +87,3 @@ export default class App extends React.Component {
         )
     }
 }
-
-
-
