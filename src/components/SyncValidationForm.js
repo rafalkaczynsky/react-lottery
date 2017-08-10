@@ -194,23 +194,23 @@ class SyncValidationForm extends React.Component {
         <Col sm={6} md={6} >
         <Field name="postcode" type="text" component={renderField} label="Postcode"/>
         </Col>
-        <Col sm={12} md={12} >
+        <Col className="radioButtons" sm={12} md={12} >
           <div>
             {radioLabel} 
           </div>
           <Col sm={12} md={12} className="radioButtons" >
           <label>
-            <Field name="apprenticeship" component="input" type="radio" value="Yes"/>{' '} Yes
+            <Field name="apprenticeship" checked component="input" type="radio" value="Yes"/>{' '} Yes
           </label>
           <label>
-            <Field name="apprenticeship" component="input" type="radio" value="Yes" />{' '} No
+            <Field name="apprenticeship" component="input" type="radio" value="No" />{' '} No
           </label>
           <label>
-            <Field name="apprenticeship" component="input" type="radio" value="Yes" />{' '} Undecided
+            <Field name="apprenticeship" component="input" type="radio" value="Undecided" />{' '} Undecided
           </label>
           </Col>
         </Col>
-        <Col sm={12} md={12} >
+        <Col sm={12} md={12} id="consent-area" >
           <Field className="consentField" name="consent" component={renderCheckboxField} label={agreement} type="checkbox"/>
         </Col>
         <div>

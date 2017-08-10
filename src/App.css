@@ -6,6 +6,11 @@ html, body {
 
   font-size: 16px;
 }
+.maxWidthFrame{
+  max-width:1200px;
+  margin: 0 auto;
+
+}
 
 .submitButton{
   width: 100%;
@@ -29,15 +34,19 @@ html, body {
   margin-top:0 !important;
 }
 
+#consent-area > div > span {
+  display: none!important;
+}
 .formContainer, .lotteryContainer {
   margin: 40px auto;
   border-radius: 5px;
-  padding: 50px;
-  background-color: #f9f9f9;
+  padding: 25px;
+/*  background-color: #f9f9f9;*/
   border-radius: 9px;
   -webkit-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
   -moz-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
   box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
+  border: 1px solid #eee;
 }
 .FeedbackContainer{
   padding: 20px;
@@ -58,6 +67,9 @@ checkbox {
   margin:0px;
 }
 
+.radioButtons{
+
+}
 
 /* code checker */
 

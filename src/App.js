@@ -26,15 +26,18 @@ export default class App extends React.Component {
         var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT + '/api/users'
 
         return(
-            <div className="mainContainer">
-                <Header />
-                <div className="mainImageContainer">
-                    <img src={require('./images/image.jpg')} width="100%" alt="mainPicture"/>
-                </div>
-                <Col sm={12} md={12} xs={12}>
-                    <Col sm={6} md={6} xs={12} className="leftSideContent">
-                     
-                            <h3>Crack the code to our accountant’s briefcase and unlock the start to your career.</h3>
+        <div className="mainContainer">
+            <Header />
+         { /* <div className="mainImageContainer">
+                <img src={require('./images/image.jpg')} width="100%" alt="mainPicture"/>
+            </div>*/}
+            <div className="maxWidthFrame" >
+                <Col  sm={12} md={12} xs={12}>
+                <Col  className="page-header">
+                    <h2>Crack the code to our accountant’s briefcase and unlock the start to your career.</h2>
+                </Col>
+                    <Col sm={4} md={4} xs={12} className="leftSideContent">
+                    
                             <p>The life of an accountant is an interesting one, you never know with who or where you might end up working. All businesses need an accountant and ours have been busy collecting prizes wherever they go.</p>
                             <p>To crack the case simply fill in your details to reveal your pincode. Enter this into the briefcase to see if you’re a winner. There will be prizes every day until **** so if you aren’t a lucky winner you can try again tomorrow.</p>          
                             <h3>Could this be the start of your career?</h3>             
@@ -65,7 +68,8 @@ export default class App extends React.Component {
                             </p>
         
                     </Col>
-                    <Col sm={6} md={6} xs={12} className="rightSideContent">
+                   
+                    <Col sm={8} md={8} xs={12} className="rightSideContent">
                         <MovieBox 
                             movieUrl={this.state.movieUrl}
                             autoPlay={this.state.autoPlay}
@@ -78,6 +82,7 @@ export default class App extends React.Component {
                     </Col>
                 </Col>
             </div>
+        </div>
         )
     }
 }
