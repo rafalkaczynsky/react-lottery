@@ -184,7 +184,7 @@ class LotteryContainer extends React.Component {
             })
           } else {
              // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
-            handleAll('/videos/no-win.mp4', true)
+            handleAll('http://138.68.170.17/videos/no-win.mp4', true)
             window.location.hash = 'video-box';
             document.getElementsByTagName('video')[0].play();
           }
