@@ -47,27 +47,35 @@ export default class App extends React.Component {
                                 <a href="https://kaplan.co.uk/apprenticeships/jobs-board"> apply for your Apprenticeship.</a>
                             </p>
                             <h3>What next?</h3>
-                            <p>Sign up to receive our monthly newsletter where we’ll send you the Apprenticeships available in your area
+                            <ul className="whatNextList">
+                            <li><span className="glyphicon glyphicon-envelope"></span>
+                            Sign up to receive our monthly newsletter where we’ll send you the Apprenticeships available in your area
                                 <a href="https://kaplan.co.uk/apprenticeships/newsletter"> Sign up now</a>
-                            </p>
+                            </li>
 
-                            <p>Want to know more about what it is like to be an Apprentice?
+
+                            <li><span className="glyphicon glyphicon-question-sign"></span>
+                            Want to know more about what it is like to be an Apprentice?
                                 <a href="https://kaplan.co.uk/apprenticeships/talent-academy/apprentice-stories"> Check out our apprentice stories. </a>
-                            </p>
+                            </li>
 
-                            <p>Not sure whether an Apprenticeship or uni is the right choice for you?
+                            <li><span className="glyphicon glyphicon-education"></span>
+                            Not sure whether an Apprenticeship or uni is the right choice for you?
                                 <a href="https://kaplan.co.uk/apprenticeships/talent-academy/infographics/detail/talent-academy/2016/07/08/apprenticeship-or-university-what-s-the-right-choice-for-me"> View our handy infographic to help you decide.</a>
-                            </p>
+                            </li>
 
-                            <p>Need help putting together your CV?
+                            <li><span className="glyphicon glyphicon-briefcase"></span>
+                            Need help putting together your CV?
                                 <a href="https://kaplan.co.uk/apprenticeships/talent-academy/advice-and-tips/detail/talent-academy/2016/07/12/hints-and-tips-for-the-perfect-cv"> Read our CV tips</a>
-                            </p>
+                            </li>
 
-                            <p>Want to know more about accountancy? Find out what it’s like to work as a
+                            <li><span className="glyphicon glyphicon-search"></span>
+                            Want to know more about accountancy? Find out what it’s like to work as a
                                 <a href="https://kaplan.co.uk/apprenticeships/talent-academy/news/detail/talent-academy/2017/03/06/your-guide-to-starting-out-in-forensic-accounting"> forensic accountant helping out the courts or businesses</a>
                                     or a
                                 <a href="https://kaplan.co.uk/apprenticeships/talent-academy/news/detail/talent-academy/2017/03/06/interview-with-a-production-accountant"> production accountant working in the film industry</a>
-                            </p>
+                            </li>
+                            </ul>
 
                     </Col>
 
@@ -81,6 +89,17 @@ export default class App extends React.Component {
                             pollInterval={2000}
                             handleAll={this.handleAll.bind(this)}
                         />
+                      <Col sm={2} md={2} xs={3}>
+                        <div className="fb-share-button" data-href="http://resultsweek.com" data-layout="button" data-size="large" data-mobile-iframe="true">
+                          <a className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fresultsweek.com&amp;src=sdkpreparse">Share Now</a>
+                        </div>
+                        </Col>
+                        <Col sm={2} md={2} xs={3}>
+                        <a className="twitter-share-button"
+                          href="https://twitter.com/intent/tweet?text=Crack%20the%20code%20to%20our%20accountant's%20briefcase%20and%20unlock%20the%20start%20to%20your%20career%20pic.twitter.com/CcOfr1gfbd"
+                          data-size="large">
+                        Tweet</a>
+                        </Col>
                     </Col>
                 </Col>
             </div>

@@ -18,11 +18,21 @@ video::-webkit-media-controls {
 video::-webkit-media-controls-start-playback-button {
   display: none !important;
 }
+.whatNextList {
+  list-style: none;
+  padding:0;
+}
+.whatNextList li{
+  margin-bottom:20px;
+}
+.whatNextList li span{
+  margin-right: 10px;
+}
 .arrow_box {
-	position: fixed;
+	position: absolute;
 	background: #39408d;
 	border: 4px solid #39408d;
-  right:50px;
+  left:500px;
   top:250px;
   padding:20px;
   width: 200px;
@@ -56,7 +66,7 @@ video::-webkit-media-controls-start-playback-button {
 
 .maxWidthFrame{
   max-width:960px;
-  margin: 220px 0 0 70px;
+  margin: 220px auto;
 }
 
 .submitButton{
@@ -196,10 +206,13 @@ h1 {
   .maxWidthFrame{
     margin:220px auto;
   }
+  .maxWidthContainer{
+    background-color: #ffffff;
+  }
   .arrow_box {
   	position: relative;
   	border: 4px solid #39408d;
-    right:auto;
+    left:auto;
     top:auto;
     padding:20px;
     width: auto;
@@ -228,7 +241,5 @@ h1 {
     padding: 20px;
     background-color: #ffffff;
   }
-  .maxWidthContainer{
-    background-color: #ffffff;
-  }
+
 }
