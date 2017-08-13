@@ -30,8 +30,7 @@ class KaplanLotteryBox extends Component {
 
     return (
       <div>
-        <p className="arrow_box">To crack the case simply fill in your details to reveal your pincode. Enter this into the briefcase to see if you’re a winner. There will be prizes every day until the 11th of September so if you aren’t a lucky winner you can try again tomorrow.</p>
-
+        <p className="arrow_box">To crack the case simply fill in your details to reveal your pincode. Enter this into the briefcase to see if you’re a winner. Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room.   Prizes can be won every day until the 25th August  so if you aren’t a lucky winner make sure you come back tomorrow to get another code.</p>
         <div className="app">
           {this.state.isFormSubmitted &&
               <LotteryContainer

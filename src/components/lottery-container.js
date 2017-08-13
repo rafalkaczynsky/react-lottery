@@ -143,8 +143,8 @@ class LotteryContainer extends React.Component {
 
     const submit = (values) => {
 
-      let code = String(values.code)
-
+      //let code = String(values.code)
+      let code = document.getElementById('checkCodeInput').value;
       vaucherJSON.map((item)=> {
         if (item.code === code ){
           validCode = true
@@ -198,15 +198,12 @@ class LotteryContainer extends React.Component {
     let header2 = header.substring(13)
     return (
       <Col  id="fliper" className="lotteryContainer"  sm={12} md={12} xs={12} >
-        <PageHeader className="pageHeader">{header1}<br/>{header2}<br/><small>{paragraph}</small></PageHeader>
+        <PageHeader className="pageHeader">{header1}<br/>{header2}<br/></PageHeader>
         <form onSubmit={handleSubmit(submit)}>
-          <Field name="code" value={this.state.codeValue} type="text" component={renderField} label="Your Code" />
+          <input id="checkCodeInput" type="hidden" name="code" value={header.substring(13)}  />
           <div>
-            <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active>Submit</Button>
+            <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active><small>Click here to see if you have won!</small></Button>
           </div>
-          <small>
-            You should have received a code when signing up to our newsletter <a href="/">here</a>. If you have subscribed but have not received email, <a href="mailto:admin@mediacabin.co.uk">please notify us now.</a>
-          </small>
         </form>
       </Col>
   )
