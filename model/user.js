@@ -11,6 +11,7 @@ var userSchema = new Schema({
         surname: String,
         email: String,
         dob: Date,
+        lastPlay: Date,
         postcode: String,
         apprenticeship: String,
         consent: Boolean,
