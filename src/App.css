@@ -12,7 +12,22 @@ body{
   background-size:1280px;
   background-position: left top;
 }
-
+.buttonLink{
+  margin-top: 0.5em;
+  display: block;
+  width: 100%;
+  background: #39408d;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+.buttonLink:hover{
+  color:#fff;
+  background-color: #5a5f9e;
+  text-decoration: none;
+}
 .maxWidthFrame{
   max-width:960px;
   margin: 220px auto;
