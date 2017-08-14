@@ -58,7 +58,7 @@ export default class App extends React.Component {
                             <li><span className="glyphicon glyphicon-gift" ></span>Nando’s vouchers!</li>
                             </ul>
                             </div>
-                            <h3>Whilst your here, why not unlock the start to your career….</h3>
+                            <h3>Whilst you're here, why not unlock the start to your career….</h3>
                             <p>If you’re getting your results in August you may be thinking about what to do next. </p>
                             <br/>
                             <p> An Apprenticeship offers the best of both worlds, you can start earning straight away while still learning. </p>
