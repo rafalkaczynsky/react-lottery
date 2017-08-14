@@ -66,7 +66,7 @@ export default class App extends React.Component {
                             <p>We’ve got Apprenticeships available in accountancy, financial services, customer services and administration. </p>
                       {/*     <br/>
                              <p> Head over to our jobs board now and
-                                <a href="https://kaplan.co.uk/apprenticeships/jobs-board?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[apply-for-your-Apprenticeship]"> apply for your Apprenticeship.</a>
+                                <a href="https://kaplan.co.uk/apprenticeships/jobs-board?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=apply-for-your-apprenticeship"> apply for your Apprenticeship.</a>
                             </p>
 
                             */}
@@ -79,7 +79,7 @@ export default class App extends React.Component {
                                 </Col>
                               <Col sm={10} md={10} xs={9}>
                                 <p>  Get our monthly newsletter where we’ll send you the Apprenticeships available in your area
-                                    <a className="buttonLink" href="https://kaplan.co.uk/apprenticeships/newsletter?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[sign-up-now]"> Sign up now</a>
+                                    <a className="buttonLink" href="https://kaplan.co.uk/apprenticeships/newsletter?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=sign-up-now"> Sign up now</a>
                                 </p>
                               </Col>
                             </li>
