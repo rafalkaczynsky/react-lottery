@@ -118,7 +118,6 @@ export default class App extends React.Component {
                               </Col>
                             </li>
                             </ul>
-
                     </Col>
 
                     <Col sm={12} md={6} xs={12} className="rightSideContent pull-right">

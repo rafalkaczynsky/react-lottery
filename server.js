@@ -87,6 +87,7 @@ router.route('/users')
     user.surname = req.body.surname
     user.email = req.body.email
     user.dob = req.body.dob
+    user.lastPlay =req.body.lastPlay
     user.postcode = req.body.postcode
     user.apprenticeship = req.body.apprenticeship
     user.consent = req.body.consent,
