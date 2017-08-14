@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Col} from 'react-bootstrap'
 
 import {RenderMovie} from '../components'
 import '../App.css';

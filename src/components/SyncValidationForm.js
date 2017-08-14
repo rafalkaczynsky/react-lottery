@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { Field, reduxForm } from 'redux-form'
 
-import {Button, FormGroup, Col, ControlLabel, FormControl, Checkbox, HelpBlock, PageHeader} from 'react-bootstrap'
+import {Button, FormGroup, Col, ControlLabel, FormControl, Checkbox, HelpBlock} from 'react-bootstrap'
 
 var DatePicker = require("react-bootstrap-date-picker");
 
@@ -148,13 +148,6 @@ class SyncValidationForm extends React.Component {
 
         let dateToday =   day + '/' + month + '/' + year
 
-        console.log(dateToday)
-        console.log(item.lastPlay)
-
-    //    let convertedToday = new Date(dateToday)
-    //    let convertedLastPlay = new Date(item.lastPlay)
-
-
         if ((item.email === values.email) && (dateToday === item.lastPlay)){
           
           let header = 'Looks like you have already had a go today. Try again tomorrow'
@@ -181,6 +174,7 @@ class SyncValidationForm extends React.Component {
               console.error(err);
             });
             }
+          return item
         })
     }
     const agreement = 'I consent to receiving updates from Kaplan. I understand that Kaplan will never sell my data and I consent to it being shared with selected third parties for the purposes of performing business services only. Please see our Privacy Policy for further details on how we handle your data. *'
