@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Header, KaplanLotteryBox, MovieBox  } from './components'
+import {KaplanLotteryBox, MovieBox  } from './components'
 
 import {Col} from 'react-bootstrap'
 
@@ -51,13 +51,13 @@ export default class App extends React.Component {
 
                             <p>The life of an accountant is an interesting one, you never know with who or where you might end up working. All businesses need an accountant and ours have been busy collecting prizes wherever they go. </p>
                             <br/>
-                            <p className="alert alert-info">Crack the code to win prizes including
+                            <div className="alert alert-info">Crack the code to win prizes including
                             <ul className="prize-list">
                             <li><span className="glyphicon glyphicon-gift" ></span>Up to £100 cash</li>
                             <li><span className="glyphicon glyphicon-gift" ></span>Cinema tickets &</li>
                             <li><span className="glyphicon glyphicon-gift" ></span>Nando’s vouchers!</li>
                             </ul>
-                            </p>
+                            </div>
                             <h3>Whilst your here, why not unlock the start to your career….</h3>
                             <p>If you’re getting your results in August you may be thinking about what to do next. </p>
                             <br/>
@@ -152,7 +152,7 @@ export default class App extends React.Component {
                         />
                       <Col sm={2} md={2} xs={3}>
                         <div className="fb-share-button" data-href="http://resultsweek.com" data-layout="button" data-size="large" data-mobile-iframe="true">
-                          <a className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fresultsweek.com&amp;src=sdkpreparse?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[share-Now]">Share Now</a>
+                          <a className="fb-xfbml-parse-ignore" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fresultsweek.com&amp;src=sdkpreparse?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[share-Now]">Share Now</a>
                         </div>
                         </Col>
                         <Col sm={2} md={2} xs={3}>

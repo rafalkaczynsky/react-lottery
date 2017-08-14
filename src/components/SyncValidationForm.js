@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { Field, reduxForm } from 'redux-form'
 
-import {Button, FormGroup, Col, ControlLabel, FormControl, Checkbox, HelpBlock, PageHeader} from 'react-bootstrap'
+import {Button, FormGroup, Col, ControlLabel, FormControl, Checkbox, HelpBlock} from 'react-bootstrap'
 
 var DatePicker = require("react-bootstrap-date-picker");
 
@@ -140,20 +140,30 @@ class SyncValidationForm extends React.Component {
 
     const submit = (values) =>  {
       usersJSON.map((item ,indx)=> {
-        if (item.email === values.email) {
 
-          let header = 'Looks like you have already had a go. Try again tomorrow'
+        var dateObj = new Date();
+        
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+
+        let dateToday =   day + '/' + month + '/' + year
+
+        if ((item.email === values.email) && (dateToday === item.lastPlay)){
+          
+          let header = 'Looks like you have already had a go today. Try again tomorrow'
           let paragraph = 'none'
 
            setFeedBack(true, header, paragraph)
-        } else if ((indx === (usersJSON.length -1)) && (item.email !== values.email)) {
+        } else if (indx === (usersJSON.length -1)) {
             let user = values
-            //let newItem = false;
-            //let randumNumber = Math.floor((Math.random() * 1000))
-            let randomCode = setUnique(vaucherJSON);
 
+            let randomCode = setUnique(vaucherJSON);
             user.userCode = randomCode
               // user.userCode = "P47E-Xknk"
+
+            user.lastPlay = dateToday
+
             axios.post(this.props.url, user)
             .then(res => {
 
@@ -165,6 +175,7 @@ class SyncValidationForm extends React.Component {
               console.error(err);
             });
             }
+          return item
         })
     }
     const agreement = 'I consent to receiving updates from Kaplan. I understand that Kaplan will never sell my data and I consent to it being shared with selected third parties for the purposes of performing business services only. Please see our Privacy Policy for further details on how we handle your data. *'

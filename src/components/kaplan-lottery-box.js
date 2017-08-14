@@ -35,10 +35,10 @@ class KaplanLotteryBox extends Component {
 
     return (
       <div>
-        <p id="arrow_box" className="arrow_box">
+        <div id="arrow_box" className="arrow_box">
         <Col  className="page-header"> <h3> {this.props.callOutTitle} </h3> </Col>
         {this.props.callOutText}
-        </p>
+        </div>
         <div className="app">
           {this.state.isFormSubmitted &&
               <LotteryContainer
