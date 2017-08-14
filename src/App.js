@@ -91,7 +91,7 @@ export default class App extends React.Component {
                              </Col>
                              <Col sm={10} md={10} xs={9}>
                              <p> Head over to our jobs board now and apply for your Apprenticeship.
-                                <a className="buttonLink" href="https://kaplan.co.uk/apprenticeships/jobs-board?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[apply-for-your-Apprenticeship]"> Apply now.</a>
+                                <a className="buttonLink" href="https://kaplan.co.uk/apprenticeships/jobs-board?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[apply-for-your-Apprenticeship]"> Apply now</a>
                             </p>
                              </Col>
                            </li>
