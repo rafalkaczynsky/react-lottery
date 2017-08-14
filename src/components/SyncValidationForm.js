@@ -120,7 +120,7 @@ const renderDateInputField = ({
 }) =>
   <FormGroup controlId="formValidationError2" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
       <ControlLabel>{label}</ControlLabel>
-      <DatePicker id="datepicker"  {...input} dateFormat="DD/MM/YYYY" defaultValue="1999-08-14T04:51:03.301Z" />
+      <DatePicker id="datepicker"  {...input} dateFormat="DD/MM/YYYY" />
       <FormControl.Feedback />
       {touched &&
         ((error &&
@@ -142,8 +142,8 @@ class SyncValidationForm extends React.Component {
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
 
-          let header = 'Oops, looks like you have already subscribed'
-          let paragraph = 'We are very sorry but you can only play this once'
+          let header = 'Looks like you have already had a go. Try again tomorrow'
+          let paragraph = 'none'
 
            setFeedBack(true, header, paragraph)
         } else if ((indx === (usersJSON.length -1)) && (item.email !== values.email)) {
@@ -187,11 +187,11 @@ class SyncValidationForm extends React.Component {
         <Col sm={6} md={6} >
         <Field name="postcode" type="text" component={renderField} label="Postcode"/>
         </Col>
-        <Col sm={12} md={12} >
+        <Col className="form-group" sm={12} md={12} >
           <div>
             {radioLabel}
           </div>
-          <Col sm={12} md={12} className="radioButtons" >
+          <Col sm={12} md={12} className="row radioButtons" >
           <label>
             <Field name="apprenticeship" component="input" type="radio" value="Yes"/>{' '} Yes
           </label>

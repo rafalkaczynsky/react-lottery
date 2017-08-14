@@ -13,16 +13,18 @@ export default class App extends React.Component {
             title:'',
             allFields:{},
             autoPlay: false,
-            callOutText: 'To crack the case simply fill in your details to reveal your pincode. Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room. Prizes can be won every day until the 25th August so if you aren’t a lucky winner make sure you come back tomorrow to get another code.'
+            callOutTitle: 'To crack the case',
+            callOutText: 'Simply fill in your details to reveal your pincode. Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room. Prizes can be won every day until the 25th August so if you aren’t a lucky winner make sure you come back tomorrow to get another code.'
         }
     }
 
-    handleAll(movieUrl,title,allFields, autoPlay,callOutText) {
+    handleAll(movieUrl,title,allFields, autoPlay,callOutTitle,callOutText) {
         this.setState({
             movieUrl: movieUrl,
             autoPlay: autoPlay,
             title: title,
             allFields:allFields,
+            callOutTitle: callOutTitle,
             callOutText: callOutText
         })
     }
@@ -126,12 +128,14 @@ export default class App extends React.Component {
                             title={this.state.title}
                             allFields={this.state.allFields}
                             callOutText={this.state.callOutText}
+                            callOutTitle={this.state.callOutTitle}
                         />
                         <KaplanLotteryBox
                             url={baseurl}
                             pollInterval={2000}
                             handleAll={this.handleAll.bind(this)}
                             callOutText={this.state.callOutText}
+                            callOutTitle={this.state.callOutTitle}
                         />
                       <Col sm={2} md={2} xs={3}>
                         <div className="fb-share-button" data-href="http://resultsweek.com" data-layout="button" data-size="large" data-mobile-iframe="true">

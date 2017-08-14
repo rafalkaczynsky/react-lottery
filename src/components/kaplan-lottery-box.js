@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Col} from 'react-bootstrap'
 
 import {SyncValidationForm, LotteryContainer} from './'
 import '../App.css';
@@ -13,6 +14,7 @@ class KaplanLotteryBox extends Component {
       header: '',
       paragraph: '',
       callOutText:'',
+      callOutTitle:'',
       movieUrl: '',
       title:'',
       allFields:{},
@@ -33,7 +35,10 @@ class KaplanLotteryBox extends Component {
 
     return (
       <div>
-        <p className="arrow_box">{this.props.callOutText}</p>
+        <p id="arrow_box" className="arrow_box">
+        <Col  className="page-header"> <h3> {this.props.callOutTitle} </h3> </Col>
+        {this.props.callOutText}
+        </p>
         <div className="app">
           {this.state.isFormSubmitted &&
               <LotteryContainer
@@ -47,6 +52,7 @@ class KaplanLotteryBox extends Component {
                 paragraph={this.state.paragraph}
                 movieUrl={this.state.movieUrl}
                 callOutText={this.state.callOutText}
+                callOutTitle={this.state.callOutTitle}
                 title={this.state.title}
                 allFields={this.state.allFields}
                 autoPlay={this.state.autoPlay}
