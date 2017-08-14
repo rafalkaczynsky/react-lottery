@@ -10,14 +10,20 @@ export default class App extends React.Component {
 
         this.state={
             movieUrl: '',
-            autoPlay: false
+            title:'',
+            allFields:{},
+            autoPlay: false,
+            callOutText: 'To crack the case simply fill in your details to reveal your pincode. Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room. Prizes can be won every day until the 25th August so if you aren’t a lucky winner make sure you come back tomorrow to get another code.'
         }
     }
 
-    handleAll(movieUrl, autoPlay) {
+    handleAll(movieUrl,title,allFields, autoPlay,callOutText) {
         this.setState({
             movieUrl: movieUrl,
-            autoPlay: autoPlay
+            autoPlay: autoPlay,
+            title: title,
+            allFields:allFields,
+            callOutText: callOutText
         })
     }
 
@@ -117,11 +123,15 @@ export default class App extends React.Component {
                         <MovieBox
                             movieUrl={this.state.movieUrl}
                             autoPlay={this.state.autoPlay}
+                            title={this.state.title}
+                            allFields={this.state.allFields}
+                            callOutText={this.state.callOutText}
                         />
                         <KaplanLotteryBox
                             url={baseurl}
                             pollInterval={2000}
                             handleAll={this.handleAll.bind(this)}
+                            callOutText={this.state.callOutText}
                         />
                       <Col sm={2} md={2} xs={3}>
                         <div className="fb-share-button" data-href="http://resultsweek.com" data-layout="button" data-size="large" data-mobile-iframe="true">

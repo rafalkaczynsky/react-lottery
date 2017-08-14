@@ -153,7 +153,9 @@ class LotteryContainer extends React.Component {
               if ((winnerCode.code === code) && (winnerCode.claimed === false)){
                      //  WINN !!!!!!!!!!!!
 
-                   handleAll(winnerCode.url, true)
+                  let callOutTextNew = "We have your details on record, we will be in touch shortly to tell you how to claim your prize"
+
+                   handleAll(winnerCode.url,winnerCode.title,winnerCode, true, callOutTextNew)
                    let winnerItem = {}
                    //check user by check code entered
                    users.map((user , indx) => {
@@ -176,15 +178,15 @@ class LotteryContainer extends React.Component {
                         }).catch(err => {
                             console.error(err);
                         });
-
-
                     }
                    })
               }
             })
           } else {
              // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
-            handleAll('http://138.68.170.17/videos/no-win.mp4', true)
+             let callOutTextNew = "Soz, try again tomorrow"
+
+            handleAll('http://138.68.170.17/videos/no-win.mp4',"Maybe next time",{}, true, callOutTextNew)
             window.location.hash = 'video-box';
             document.getElementsByTagName('video')[0].play();
           }

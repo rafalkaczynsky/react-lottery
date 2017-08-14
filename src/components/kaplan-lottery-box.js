@@ -12,7 +12,10 @@ class KaplanLotteryBox extends Component {
       isFormSubmitted: false,
       header: '',
       paragraph: '',
+      callOutText:'',
       movieUrl: '',
+      title:'',
+      allFields:{},
       autoPlay: false,
     }
   }
@@ -30,7 +33,7 @@ class KaplanLotteryBox extends Component {
 
     return (
       <div>
-        <p className="arrow_box">To crack the case simply fill in your details to reveal your pincode. Enter this into the briefcase to see if you’re a winner. Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room.   Prizes can be won every day until the 25th August  so if you aren’t a lucky winner make sure you come back tomorrow to get another code.</p>
+        <p className="arrow_box">{this.props.callOutText}</p>
         <div className="app">
           {this.state.isFormSubmitted &&
               <LotteryContainer
@@ -43,6 +46,9 @@ class KaplanLotteryBox extends Component {
                 header={this.state.header}
                 paragraph={this.state.paragraph}
                 movieUrl={this.state.movieUrl}
+                callOutText={this.state.callOutText}
+                title={this.state.title}
+                allFields={this.state.allFields}
                 autoPlay={this.state.autoPlay}
                 handleAll={this.props.handleAll}
               />

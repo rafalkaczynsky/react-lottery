@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Col} from 'react-bootstrap'
 
 import {RenderMovie} from '../components'
 import '../App.css';
@@ -7,15 +8,18 @@ class MovieBox extends Component {
 
   render() {
 
-    const { movieUrl, autoPlay } = this.props
+    const { movieUrl, autoPlay, allFields,callOutText } = this.props
 
     return (
         <div className="MovieBox">
-            <RenderMovie 
+            <RenderMovie
                 movieUrl={movieUrl}
+                callOutText={callOutText}
                 autoPlay={autoPlay}
+                allFields={allFields}
               />
-        </div>  
+  
+        </div>
 
     );
   }

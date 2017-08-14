@@ -61,10 +61,6 @@ const validate = values => {
     errors.postcode = 'Invalid Postcode'
   }
 
-  if (!values.consent) {
-    errors.consent= 'Required'
-  }
-
   return errors
 }
 // ------------------------- warnings ----------------------------------
@@ -124,7 +120,7 @@ const renderDateInputField = ({
 }) =>
   <FormGroup controlId="formValidationError2" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
       <ControlLabel>{label}</ControlLabel>
-      <DatePicker id="datepicker"  {...input} />
+      <DatePicker id="datepicker"  {...input} dateFormat="DD/MM/YYYY" defaultValue="1999-08-14T04:51:03.301Z" />
       <FormControl.Feedback />
       {touched &&
         ((error &&
@@ -197,7 +193,7 @@ class SyncValidationForm extends React.Component {
           </div>
           <Col sm={12} md={12} className="radioButtons" >
           <label>
-            <Field name="apprenticeship" checked component="input" type="radio" value="Yes"/>{' '} Yes
+            <Field name="apprenticeship" component="input" type="radio" value="Yes"/>{' '} Yes
           </label>
           <label>
             <Field name="apprenticeship" component="input" type="radio" value="No" />{' '} No
