@@ -142,7 +142,7 @@ class SyncValidationForm extends React.Component {
       usersJSON.map((item ,indx)=> {
 
         var dateObj = new Date();
-        
+
         var month = dateObj.getUTCMonth() + 1; //months from 1-12
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
@@ -150,7 +150,7 @@ class SyncValidationForm extends React.Component {
         let dateToday =   day + '/' + month + '/' + year
 
         if ((item.email === values.email) && (dateToday === item.lastPlay)){
-          
+
           let header = 'Looks like you have already had a go today. Try again tomorrow'
           let paragraph = 'none'
 
@@ -221,7 +221,7 @@ class SyncValidationForm extends React.Component {
           <Button type="submit" className="submitButton" disabled={submitting} bsStyle="primary" bsSize="large" active>Submit</Button>
         </div>
       </form>
-  )
+      )
 }
 }
 
