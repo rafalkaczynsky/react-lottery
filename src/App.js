@@ -51,7 +51,7 @@ export default class App extends React.Component {
 
                             <p>The life of an accountant is an interesting one, you never know with who or where you might end up working. All businesses need an accountant and ours have been busy collecting prizes wherever they go. </p>
                             <br/>
-                            <p className="alert alert-success">Crack the code to win prizes including
+                            <p className="alert alert-info">Crack the code to win prizes including
                             <ul className="prize-list">
                             <li><span className="glyphicon glyphicon-gift" ></span>Up to £100 cash</li>
                             <li><span className="glyphicon glyphicon-gift" ></span>Cinema tickets &</li>
