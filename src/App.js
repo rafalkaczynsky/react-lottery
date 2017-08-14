@@ -165,12 +165,12 @@ export default class App extends React.Component {
                             callOutText={this.state.callOutText}
                             callOutTitle={this.state.callOutTitle}
                         />
-                      <Col sm={2} md={2} xs={3}>
+                      <Col sm={2} md={2} xs={4}>
                         <div className="fb-share-button" data-href="http://resultsweek.com" data-layout="button" data-size="large" data-mobile-iframe="true">
                           <a className="fb-xfbml-parse-ignore" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fresultsweek.com&amp;src=sdkpreparse?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[share-Now]">Share Now</a>
                         </div>
                         </Col>
-                        <Col sm={2} md={2} xs={3}>
+                        <Col sm={2} md={2} xs={4}>
                         <a className="twitter-share-button"
                           href="https://twitter.com/intent/tweet?text=Crack%20the%20code%20to%20our%20accountant's%20briefcase%20and%20unlock%20the%20start%20to%20your%20career%20pic.twitter.com/CcOfr1gfbd?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[tweet]"
                           data-size="large">
