@@ -14,7 +14,7 @@ export default class App extends React.Component {
             allFields:{},
             autoPlay: false,
             callOutTitle: 'To crack the case simply fill in your details to reveal your pincode',
-            callOutText: 'Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room. Prizes can be won every day until the 25th August so if you aren’t a lucky winner make sure you come back tomorrow to get another code.'
+            callOutText: 'Prizes can be won every day until the 25th August so if you aren’t a lucky winner make sure you come back tomorrow to get another code.'
         }
     }
 
@@ -51,7 +51,13 @@ export default class App extends React.Component {
 
                             <p>The life of an accountant is an interesting one, you never know with who or where you might end up working. All businesses need an accountant and ours have been busy collecting prizes wherever they go. </p>
                             <br/>
-                            <p className="alert alert-success">Crack the code to win prizes including £100 cash, cinema tickets and Nando’s vouchers!</p>
+                            <p className="alert alert-success">Crack the code to win prizes including
+                            <ul className="prize-list">
+                            <li><span className="glyphicon glyphicon-gift" ></span>Up to £100 cash</li>
+                            <li><span className="glyphicon glyphicon-gift" ></span>Cinema tickets &</li>
+                            <li><span className="glyphicon glyphicon-gift" ></span>Nando’s vouchers!</li>
+                            </ul>
+                            </p>
                             <h3>Whilst your here, why not unlock the start to your career….</h3>
                             <p>If you’re getting your results in August you may be thinking about what to do next. </p>
                             <br/>
