@@ -66,6 +66,8 @@ class KaplanLotteryBox extends Component {
                 setFeedBack={this.handleSetFeedBack.bind(this)}
               />
           )}
+          <p><small>View the competition Terms and Conditions <a href="http://resultsweek.com/TsandCsRWKaplan.pdf" target="_blank"> here</a></small></p>
+
         </div>
       </div>
     );

@@ -44,7 +44,7 @@ export default class App extends React.Component {
                 <Col className="maxWidthContainer" sm={12} md={12} xs={12}>
                 <Col sm={12} md={12} >
                   <Col  className="page-header">
-                      <h2>It’s nearly results week! Crack the code to our accountant’s briefcase and win loads of fab prizes.</h2>
+                      <h2>It’s results week! Crack the code to our accountant’s briefcase and win loads of fab prizes.</h2>
                   </Col>
                 </Col>
                     <Col sm={12} md={5} xs={12} className="leftSideContent">
