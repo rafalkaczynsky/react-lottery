@@ -14,6 +14,14 @@ function readJSON(file) {
     if (request.status === 200)
         return request.responseText;
 };
+function doTheVideo(){
+  window.location.hash = 'video-box';
+  document.getElementsByTagName('video')[0].play();
+  document.getElementById('arrow_box').setAttribute('class','arrow_box hide-me');
+  setTimeout(function () {
+      document.getElementById('arrow_box').setAttribute('class','arrow_box fade-me-in');
+  }, 5000);
+};
 var baseurl = process.env.REACT_APP_API_URL + ":"+ process.env.REACT_APP_API_PORT
 
 var vaucherJSON = JSON.parse(readJSON(baseurl + "/api/codes"));
@@ -50,15 +58,15 @@ const validate = values => {
     errors.code = 'Code invalid, please double check your entry'
   } //else if (userValidation === false){
    // errors.code = 'This code is not assign to you'  }
-   
+
    else {
    vaucherJSON.map((item)=> {
         if (item.code === values.code ){
           if (item.winning === true) {
             winningCodesJSON.map((winnerCode, indx)=> {
-              if ((winnerCode.code === item.code) && (winnerCode.claimed === true)){ 
+              if ((winnerCode.code === item.code) && (winnerCode.claimed === true)){
                   errors.code = 'This has been already claimed'
-              }     
+              }
             })
           }
         }
@@ -92,17 +100,17 @@ window.addEventListener("keydown", function(event){
 })
 
   if (((input.value.length === 4) && (!input.value.includes('-'))) || ((input.value.length === 5))){
-    
+
     if ((input.value.length === 5) && (backSpacePressed === true)){
       if(input.value.endsWith("-")) {
         input.value= input.value.substring(0, input.value.length - 1);
     }
-
     } else if ((input.value.length === 4) && (backSpacePressed === false)){
       input.value += '-'
     } else if ((input.value.length === 4) && !(input.value.endsWith("-")) && (!input.value.includes('-'))) {input.value += '-' }
 
   }
+
 
 return(
   <FormGroup controlId="formValidationError2" bsSize="large" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
@@ -135,16 +143,14 @@ class LotteryContainer extends React.Component {
        document.getElementById('fliper').setAttribute('class','flipAnimationContainer lotteryContainer');
   }
 
-
-
   render(){
 
     const { handleSubmit, submitting, onWin, handleAll, header, paragraph} = this.props
 
     const submit = (values) => {
 
-      let code = String(values.code)
-
+      //let code = String(values.code)
+      let code = document.getElementById('checkCodeInput').value;
       vaucherJSON.map((item)=> {
         if (item.code === code ){
           validCode = true
@@ -152,8 +158,12 @@ class LotteryContainer extends React.Component {
             winningCodesJSON.map((winnerCode, indx)=> {
               if ((winnerCode.code === code) && (winnerCode.claimed === false)){
                      //  WINN !!!!!!!!!!!!
- 
-                   handleAll(winnerCode.url, true)
+                  let callOutTitleNew = "You have won " + winnerCode.title
+
+
+                  let callOutTextNew =winnerCode.description + " We have your details on record, we will be in touch shortly to tell you how to claim your prize"
+                  doTheVideo();
+                   handleAll(winnerCode.url,winnerCode.title,winnerCode, true, callOutTitleNew, callOutTextNew)
                    let winnerItem = {}
                    //check user by check code entered
                    users.map((user , indx) => {
@@ -172,20 +182,22 @@ class LotteryContainer extends React.Component {
                         //save user to winners
                         axios.post(baseurl+'/api/winners', winnerItem)
                         .then(res => {
+
                              // .....
                         }).catch(err => {
                             console.error(err);
                         });
-
-    
                     }
                    })
               }
             })
           } else {
              // LOOSE :( !!!!!!!!!!!!!!!!!!!!!!!!!!
-            handleAll('/videos/no-win.mp4', true)
-            document.getElementsByTagName('video')[0].play();
+             let callOutTitleNew = "Unlucky!"
+             let callOutTextNew = "You haven't won anything this time but you can still try again tomorrow"
+
+            handleAll('http://138.68.170.17/videos/no-win.mp4',"Maybe next time",{}, true,callOutTitleNew, callOutTextNew)
+            doTheVideo();
           }
         }
       })
@@ -197,16 +209,15 @@ class LotteryContainer extends React.Component {
     let header2 = header.substring(13)
     return (
       <Col  id="fliper" className="lotteryContainer"  sm={12} md={12} xs={12} >
-        <PageHeader className="pageHeader">{header1}<br/>{header2}<br/><small>{paragraph}</small></PageHeader>
+        <PageHeader className="pageHeader">{header}<br/></PageHeader>
+        {paragraph != "none" &&
         <form onSubmit={handleSubmit(submit)}>
-          <Field name="code" value={this.state.codeValue} type="text" component={renderField} label="Your Code" />
+          <input id="checkCodeInput" type="hidden" name="code" value={header.substring(13)}  />
           <div>
-            <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active>Submit</Button>
+            <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active><small>Click here to see if you have won!</small></Button>
           </div>
-          <small>
-            You should have received a code when signing up to our newsletter <a href="/">here</a>. If you have subscribed but have not received email, <a href="mailto:admin@mediacabin.co.uk">please notify us now.</a>
-          </small>
         </form>
+        }
       </Col>
   )
 }

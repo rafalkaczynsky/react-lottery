@@ -3,14 +3,87 @@
 html, body {
   width: 100%;
   height: 100%;
-  background: url('./images/kaplan-header.jpg');
   font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+body{
+  background: url('./images/kaplan-header.jpg');
+  background-repeat: no-repeat;
+  background-size:1280px;
+  background-position: left top;
 }
 
 .maxWidthFrame{
-  max-width:1200px;
-  margin: 0 auto;
+  max-width:960px;
+  margin: 220px auto;
 }
+video::-webkit-media-controls {
+    display:none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}
+.whatNextList {
+  list-style: none;
+  padding:0;
+  text-align: justify;
+}
+.whatNextList li{
+  margin-bottom:20px;
+  display: inline-block;
+}
+.whatNextList li span{
+  margin-right: 10px;
+  font-size: 2em;
+}
+
+.arrow_box {
+	position: relative;
+	background: #39408d;
+  margin-top:40px;
+  padding:20px;
+  color:#fff;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: #39408d;
+	border-width: 30px;
+	margin-left: -30px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-bottom-color: #39408d;
+	border-width: 36px;
+	margin-left: -36px;
+}
+.hide-me {
+  opacity:0;
+  height:0;
+}
+.fade-me-in {
+  height:auto;
+  opacity: 1;
+  margin-top: 25px;
+  font-size: 21px;
+  text-align: center;
+  -webkit-transition: opacity 2s ease-in;
+  -moz-transition: opacity 2s ease-in;
+  -o-transition: opacity 2s ease-in;
+  -ms-transition: opacity 2s ease-in;
+  transition: opacity 2s ease-in;
+}​
+
 
 .submitButton{
   width: 100%;
@@ -30,7 +103,6 @@ html, body {
 
 .app {
     perspective: 1000px;
-    transform: rotateY(180deg);
 }
 /* ---------- form ---------- */
 
@@ -51,19 +123,17 @@ html, body {
   -moz-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
   box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.24);
   border: 1px solid #eee;
-  
+
 }
 
 .flipAnimationContainer{
- transition: 0.6s; 
- transform-style: preserve-3d; 
- position: relative; 
- transform: rotateY(180deg);
+ transition: 0.6s;
+ transform-style: preserve-3d;
+ position: relative;
+ transform: rotateY(360deg);
 }
 
-.formContainer{
-  transform: rotateY(180deg);
-}
+
 .FeedbackContainer{
   padding: 20px;
   text-align: center;
@@ -147,4 +217,24 @@ h1 {
 
 .radioButtons > label {
   margin-right: 14px;
+}
+@media  screen and (max-width: 1248px) {
+  .maxWidthFrame{
+    margin:220px auto;
+  }
+  .maxWidthContainer{
+    background-color: #ffffff;
+  }
+
+}
+@media screen and (max-width: 960px) {
+
+}
+@media screen and (max-width: 768px) {
+  .maxWidthFrame{
+    max-width:960px;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+
 }

@@ -61,10 +61,6 @@ const validate = values => {
     errors.postcode = 'Invalid Postcode'
   }
 
-  if (!values.consent) {
-    errors.consent= 'Required'
-  }
-
   return errors
 }
 // ------------------------- warnings ----------------------------------
@@ -124,7 +120,7 @@ const renderDateInputField = ({
 }) =>
   <FormGroup controlId="formValidationError2" validationState={!touched ? null : error ? 'error' : warning ? 'warning' : 'success'}>
       <ControlLabel>{label}</ControlLabel>
-      <DatePicker id="datepicker"  {...input} />
+      <DatePicker id="datepicker"  {...input} dateFormat="DD/MM/YYYY" />
       <FormControl.Feedback />
       {touched &&
         ((error &&
@@ -146,8 +142,8 @@ class SyncValidationForm extends React.Component {
       usersJSON.map((item ,indx)=> {
         if (item.email === values.email) {
 
-          let header = 'Oops, looks like you have already subscribed'
-          let paragraph = 'We are very sorry but you can only play this once'
+          let header = 'Looks like you have already had a go. Try again tomorrow'
+          let paragraph = 'none'
 
            setFeedBack(true, header, paragraph)
         } else if ((indx === (usersJSON.length -1)) && (item.email !== values.email)) {
@@ -191,13 +187,13 @@ class SyncValidationForm extends React.Component {
         <Col sm={6} md={6} >
         <Field name="postcode" type="text" component={renderField} label="Postcode"/>
         </Col>
-        <Col className="radioButtons" sm={12} md={12} >
+        <Col className="form-group" sm={12} md={12} >
           <div>
-            {radioLabel} 
+            {radioLabel}
           </div>
-          <Col sm={12} md={12} className="radioButtons" >
+          <Col sm={12} md={12} className="row radioButtons" >
           <label>
-            <Field name="apprenticeship" checked component="input" type="radio" value="Yes"/>{' '} Yes
+            <Field name="apprenticeship" component="input" type="radio" value="Yes"/>{' '} Yes
           </label>
           <label>
             <Field name="apprenticeship" component="input" type="radio" value="No" />{' '} No
@@ -219,7 +215,7 @@ class SyncValidationForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'syncValidation', 
+  form: 'syncValidation',
   validate,
-  warn 
+  warn
 })(SyncValidationForm)
