@@ -173,7 +173,7 @@ class SyncValidationForm extends React.Component {
     return (
       <form className="formContainer" onSubmit={handleSubmit(submit)}>
         <Col sm={6} md={6} >
-          <Field name="firstName" type="text" component={renderField} label="FirstName"/>
+          <Field name="firstName" type="text" component={renderField} label="First Name"/>
         </Col>
         <Col sm={6} md={6} >
           <Field name="surname" type="text" component={renderField} label="Surname"/>

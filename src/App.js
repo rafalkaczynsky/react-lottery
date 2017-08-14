@@ -13,8 +13,8 @@ export default class App extends React.Component {
             title:'',
             allFields:{},
             autoPlay: false,
-            callOutTitle: 'To crack the case',
-            callOutText: 'Simply fill in your details to reveal your pincode. Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room. Prizes can be won every day until the 25th August so if you aren’t a lucky winner make sure you come back tomorrow to get another code.'
+            callOutTitle: 'To crack the case simply fill in your details to reveal your pincode',
+            callOutText: 'Prizes range from £100 cash to vouchers for Nandos, the cinema and even an escape room. Prizes can be won every day until the 25th August so if you aren’t a lucky winner make sure you come back tomorrow to get another code.'
         }
     }
 
@@ -44,20 +44,28 @@ export default class App extends React.Component {
                 <Col className="maxWidthContainer" sm={12} md={12} xs={12}>
                 <Col sm={12} md={12} >
                   <Col  className="page-header">
-                      <h2>Crack the code to our accountant’s briefcase and unlock the start to your career.</h2>
+                      <h2>It’s nearly results week! Crack the code to our accountant’s briefcase and win loads of fab prizes.</h2>
                   </Col>
                 </Col>
                     <Col sm={12} md={5} xs={12} className="leftSideContent">
 
-                            <p>The life of an accountant is an interesting one, you never know with who or where you might end up working. All businesses need an accountant and ours have been busy collecting prizes wherever they go. Crack the case to win cash prizes and vouchers.</p>
-                            <h3>Could this be the start of your career?</h3>
-                            <p>If you’re getting results in August you may be thinking about what to do next. An Apprenticeship offers the best of both worlds, you can start earning straight away while still learning. We’ve got loads of Apprenticeships available in accountancy, financial services, customer services and administration. Head over to our jobs board now and
+                            <p>The life of an accountant is an interesting one, you never know with who or where you might end up working. All businesses need an accountant and ours have been busy collecting prizes wherever they go. </p>
+                            <br/>
+                            <p className="alert alert-success">Crack the code to win prizes including £100 cash, cinema tickets and Nando’s vouchers!</p>
+                            <h3>Whilst your here, why not unlock the start to your career….</h3>
+                            <p>If you’re getting your results in August you may be thinking about what to do next. </p>
+                            <br/>
+                            <p> An Apprenticeship offers the best of both worlds, you can start earning straight away while still learning. </p>
+                            <br/>
+                            <p>We’ve got Apprenticeships available in accountancy, financial services, customer services and administration. </p>
+                            <br/>
+                             <p> Head over to our jobs board now and
                                 <a href="https://kaplan.co.uk/apprenticeships/jobs-board?utm_source=resultsweek.com&utm_medium=referral&utm_campaign=s17-5005b-apps-results-week&utm_content=[apply-for-your-Apprenticeship]"> apply for your Apprenticeship.</a>
                             </p>
                             <h3>What next?</h3>
                             <ul className="whatNextList">
 
-                            <li>
+                            <li className="panel">
                               <Col sm={2} md={2} xs={3}>
                                 <span className="glyphicon glyphicon-envelope" ></span>
                                 </Col>
@@ -68,7 +76,7 @@ export default class App extends React.Component {
                                 </p>
                               </Col>
                             </li>
-                            <li>
+                            <li className="panel">
                               <Col sm={2} md={2} xs={3}>
                                 <span className="glyphicon glyphicon-question-sign"></span>
                                 </Col>
@@ -80,7 +88,7 @@ export default class App extends React.Component {
                               </Col>
                             </li>
 
-                            <li>
+                            <li className="panel">
                               <Col sm={2} md={2} xs={3}>
                                 <span className="glyphicon glyphicon-education"></span>
                               </Col>
@@ -92,7 +100,7 @@ export default class App extends React.Component {
                               </Col>
                             </li>
 
-                            <li>
+                            <li className="panel">
                               <Col sm={2} md={2} xs={3}>
                                 <span className="glyphicon glyphicon-briefcase"></span>
                               </Col>
@@ -104,7 +112,7 @@ export default class App extends React.Component {
                               </Col>
                             </li>
 
-                            <li>
+                            <li className="panel">
                               <Col sm={2} md={2} xs={3}>
                                 <span className="glyphicon glyphicon-search"></span>
                               </Col>
