@@ -114,6 +114,12 @@ video::-webkit-media-controls-start-playback-button {
 
 .submitButton{
   width: 100%;
+  display: flex;
+  white-space: normal!important
+}
+
+#buttonNowrap{
+  white-space: normal!important
 }
 
 .header {

@@ -180,7 +180,7 @@ class LotteryContainer extends React.Component {
         <form onSubmit={handleSubmit(submit)}>
        {/*   <input id="checkCodeInput" type="hidden" name="code" value={header.substring(13)}  />*/}
           <div>
-            <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active><small>Click here to see if you have won!</small></Button>
+            <Button id="buttonNowrap" type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large"  active><small>Click here to see if you have won!</small></Button>
           </div>
         </form>
         }
