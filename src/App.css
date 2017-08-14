@@ -12,6 +12,11 @@ body{
   background-size:1280px;
   background-position: left top;
 }
+
+input {
+  padding-right: 0!important;
+  padding-left: 5px!important;
+}
 .buttonLink{
   margin-top: 0.5em;
   display: block;
@@ -271,3 +276,4 @@ h1 {
   }
 
 }
+
