@@ -113,7 +113,9 @@ class LotteryContainer extends React.Component {
     const submit = (values) => {
 
       //let code = String(values.code)
-      let code = document.getElementById('checkCodeInput').value;
+      //let code = document.getElementById('checkCodeInput').value;
+      let code = header.substring(13)
+
       vaucherJSON.map((item)=> {
         if (item.code === code ){
           validCode = true
@@ -176,7 +178,7 @@ class LotteryContainer extends React.Component {
         <PageHeader className="pageHeader">{header}<br/></PageHeader>
         {paragraph !== "none" &&
         <form onSubmit={handleSubmit(submit)}>
-          <input id="checkCodeInput" type="hidden" name="code" value={header.substring(13)}  />
+       {/*   <input id="checkCodeInput" type="hidden" name="code" value={header.substring(13)}  />*/}
           <div>
             <Button type="submit" className="submitButton" disabled={submitting}  bsStyle="primary" bsSize="large" active><small>Click here to see if you have won!</small></Button>
           </div>
