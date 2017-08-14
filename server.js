@@ -1,5 +1,7 @@
 'use strict'
 
+var reload = require('reload');
+
 var express = require('express'),
  mongoose = require('mongoose'),
  bodyParser = require('body-parser'),
@@ -36,7 +38,7 @@ router.get('/', function(req, res) {
 router.route('/codes')
 
  .get(function(req, res) {
-
+  
     Code.find(function(err, record) {
         if (err)
         res.send(err);
@@ -71,7 +73,6 @@ router.route('/codes')
 router.route('/users')
 
  .get(function(req, res) {
-
     User.find(function(err, record) {
         if (err)
         res.send(err)
@@ -101,6 +102,8 @@ router.route('/users')
     res.json({ message: 'User successfully created!' });
 
     updateCodeDB(req.body.userCode);
+    reload(app)
+
  });
  });
 
@@ -132,7 +135,7 @@ router.route('/winners')
 
 function updateCodeDB(codeUsed){
   Code.findOne({ code: codeUsed}, function(err, doc){
-    console.log(doc)
+
       doc.used = true
       doc.save(function(err) {
       if (err)

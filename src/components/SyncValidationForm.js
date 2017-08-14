@@ -160,7 +160,8 @@ class SyncValidationForm extends React.Component {
 
             let randomCode = setUnique(vaucherJSON);
             user.userCode = randomCode
-              // user.userCode = "P47E-Xknk"
+         
+          //  user.userCode = 'IYz6-6Vd5'
 
             user.lastPlay = dateToday
 

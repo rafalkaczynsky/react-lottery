@@ -114,8 +114,8 @@ class LotteryContainer extends React.Component {
 
       //let code = String(values.code)
       //let code = document.getElementById('checkCodeInput').value;
-      let code = header.substring(13)
-
+     let code = header.substring(13)
+      //let code = 'IYz6-6Vd5'
       vaucherJSON.map((item)=> {
         if (item.code === code ){
           validCode = true
@@ -124,7 +124,6 @@ class LotteryContainer extends React.Component {
               if ((winnerCode.code === code) && (winnerCode.claimed === false)){
                      //  WINN !!!!!!!!!!!!
                   let callOutTitleNew = "You have won " + winnerCode.title
-
 
                   let callOutTextNew =winnerCode.description + " We have your details on record, we will be in touch shortly to tell you how to claim your prize"
                   doTheVideo();
