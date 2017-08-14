@@ -140,20 +140,36 @@ class SyncValidationForm extends React.Component {
 
     const submit = (values) =>  {
       usersJSON.map((item ,indx)=> {
-        if (item.email === values.email) {
 
-          let header = 'Looks like you have already had a go. Try again tomorrow'
+        var dateObj = new Date();
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+
+        let dateToday =   day + '/' + month + '/' + year
+
+        console.log(dateToday)
+        console.log(item.lastPlay)
+
+    //    let convertedToday = new Date(dateToday)
+    //    let convertedLastPlay = new Date(item.lastPlay)
+
+
+        if ((item.email === values.email) && (dateToday === item.lastPlay)){
+          
+          let header = 'Looks like you have already had a go today. Try again tomorrow'
           let paragraph = 'none'
 
            setFeedBack(true, header, paragraph)
-        } else if ((indx === (usersJSON.length -1)) && (item.email !== values.email)) {
+        } else if (indx === (usersJSON.length -1)) {
             let user = values
-            //let newItem = false;
-            //let randumNumber = Math.floor((Math.random() * 1000))
-            let randomCode = setUnique(vaucherJSON);
 
+            let randomCode = setUnique(vaucherJSON);
             user.userCode = randomCode
               // user.userCode = "P47E-Xknk"
+
+            user.lastPlay = dateToday
+
             axios.post(this.props.url, user)
             .then(res => {
 
