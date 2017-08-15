@@ -122,12 +122,14 @@ const renderDateInputField = ({
       <ControlLabel>{label}</ControlLabel>
       <DatePicker id="datepicker"  {...input} dateFormat="DD/MM/YYYY" />
       <FormControl.Feedback />
+      <div>
       {touched &&
         ((error &&
           <HelpBlock>{error}</HelpBlock>
          ) ||
           (warning &&
          <HelpBlock>{warning}</HelpBlock>))}
+         </div>
    </FormGroup>
 
 
@@ -160,7 +162,7 @@ class SyncValidationForm extends React.Component {
 
             let randomCode = setUnique(vaucherJSON);
             user.userCode = randomCode
-         
+
           //  user.userCode = 'IYz6-6Vd5'
 
             user.lastPlay = dateToday
@@ -218,9 +220,9 @@ class SyncValidationForm extends React.Component {
         <Col sm={12} md={12} id="consent-area" >
           <Field className="consentField" name="consent" component={renderCheckboxField} label={agreement} type="checkbox"/>
         </Col>
-        <div>
+        <Col sm={12} md={12}>
           <Button type="submit" className="submitButton" disabled={submitting} bsStyle="primary" bsSize="large" active>Submit</Button>
-        </div>
+        </Col>
       </form>
       )
 }

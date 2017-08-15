@@ -163,7 +163,9 @@ video::-webkit-media-controls-start-playback-button {
   border: 1px solid #eee;
 
 }
-
+.formContainer {
+  display:inline-block;
+}
 .flipAnimationContainer{
  transition: 0.6s;
  transform-style: preserve-3d;
@@ -276,4 +278,3 @@ h1 {
   }
 
 }
-
