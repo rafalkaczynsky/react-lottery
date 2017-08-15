@@ -130,8 +130,8 @@ class LotteryContainer extends React.Component {
                    handleAll(winnerCode.url,winnerCode.title,winnerCode, true, callOutTitleNew, callOutTextNew)
                    let winnerItem = {}
                    //check user by check code entered
-                   users.map((user , indx) => {
-                   if (user.userCode === code){
+                  //  users.map((user , indx) => {
+                  //  if (user.userCode === code){
                         //update winningCodes - set winnerCode.claimed  = true
                         axios.post(baseurl+'/api/winning-codes', winnerCode)
                         .then(res => {
@@ -140,19 +140,8 @@ class LotteryContainer extends React.Component {
                              console.error(err);
                         });
 
-                        winnerItem.user = user
-                        winnerItem.winnerCode = winnerCode
-
-                        //save user to winners
-                        axios.post(baseurl+'/api/winners', winnerItem)
-                        .then(res => {
-
-                             // .....
-                        }).catch(err => {
-                            console.error(err);
-                        });
-                    } return user
-                   })
+                  //   } return user
+                  //  })
               }
                   return winnerCode
             })

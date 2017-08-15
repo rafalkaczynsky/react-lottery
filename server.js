@@ -38,7 +38,7 @@ router.get('/', function(req, res) {
 router.route('/codes')
 
  .get(function(req, res) {
-  
+
     Code.find(function(err, record) {
         if (err)
         res.send(err);
@@ -65,11 +65,23 @@ router.route('/codes')
         doc.save(function(err) {
         if (err)
             res.send(err);
-
+            sendWinnerEmail(doc);
         });
     });
  })
+ /*
+ winnerItem.user = user
+ winnerItem.winnerCode = winnerCode
 
+ //save user to winners
+ axios.post(baseurl+'/api/winners', winnerItem)
+ .then(res => {
+
+      // .....
+ }).catch(err => {
+     console.error(err);
+ });
+ */
 router.route('/users')
 
  .get(function(req, res) {
@@ -102,8 +114,8 @@ router.route('/users')
     res.json({ message: 'User successfully created!' });
 
     updateCodeDB(req.body.userCode);
-    reload(app)
-
+    //reload(app)
+    sendSubscribeEmail(user);
  });
  });
 
@@ -140,7 +152,91 @@ function updateCodeDB(codeUsed){
       doc.save(function(err) {
       if (err)
           console.log('updated')
+
       });
+  });
+}
+function sendWinnerEmail(doc) {
+  var title = doc.title;
+  var desc = doc.description;
+  var code = doc.code;
+  var request = sg.emptyRequest({
+    method: 'POST',
+    path: '/v3/mail/send',
+    body: {
+      personalizations: [
+        {
+          to: [
+            {
+              email: 'admin@mediacabin.co.uk'
+            }
+          ],
+          subject: 'New Winner',
+          "substitutions": {
+            ":firstName":  title,
+            ":surname": desc,
+            ":email": code
+          },
+        }
+      ],
+      from: {
+        email: 'kaplan@mediacabin.co.uk'
+      },
+      template_id: "23fb4e4c-93ae-4971-a356-9f48ad4fd9fd",
+
+    }
+  });
+
+  sg.API(request, function (error, response) {
+    if (error) {
+      console.log('Error response received')
+    }
+    console.log(response.statusCode)
+    console.log(response.body)
+    console.log(response.headers)
+  });
+}
+
+function sendSubscribeEmail(user) {
+  var request = sg.emptyRequest({
+    method: 'POST',
+    path: '/v3/mail/send',
+    body: {
+      personalizations: [
+        {
+          to: [
+            {
+              email: 'admin@mediacabin.co.uk'
+            }
+          ],
+          subject: 'New Signup',
+          "substitutions": {
+            ":firstName":  'First Name: ' + user.firstName,
+            ":surname": 'Surname: ' + user.surname,
+            ":email": 'email: ' + user.email,
+            ":dob": 'Date of Birth: ' + user.dob,
+            ":postcode": 'postcode: ' + user.postcode,
+            ":apprenticeship": 'apprenticeship?: ' + user.apprenticeship,
+            ":consent": 'consent?: ' + user.consent,
+            ":userCode": 'code: '+ user.userCode,
+          },
+        }
+      ],
+      from: {
+        email: 'kaplan@mediacabin.co.uk'
+      },
+      template_id: "23fb4e4c-93ae-4971-a356-9f48ad4fd9fd",
+
+    }
+  });
+
+  sg.API(request, function (error, response) {
+    if (error) {
+      console.log('Error response received')
+    }
+    console.log(response.statusCode)
+    console.log(response.body)
+    console.log(response.headers)
   });
 }
 
