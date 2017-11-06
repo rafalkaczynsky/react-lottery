@@ -9,7 +9,8 @@ var express = require('express'),
  Code = require('./model/code'),
  WinningCode = require('./model/winningCode'),
  Winner = require('./model/winner'),
- sg = require('sendgrid')("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")
+ someKey = 'blabalbabalbal'
+ sg = require('sendgrid')(someKey)
 
 
 var app = express()
@@ -17,8 +18,8 @@ var router = express.Router()
 
 
 var port = process.env.REACT_APP_API_PORT || 3001
-
-mongoose.connect('mongodb://rafalkaczynsky1985:paulinka97@ds129723.mlab.com:29723/kaplan-lottery')
+mongodbUrlfromMlabDB = 'someUrl from mlbab'
+mongoose.connect(mongodbUrlfromMlabDB)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
